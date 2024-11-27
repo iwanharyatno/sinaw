@@ -76,4 +76,5 @@ class HomeController extends Controller
 
         return redirect()->route('home.index');
     }
+    
 }

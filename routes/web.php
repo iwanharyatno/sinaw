@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
-use Faker\Guesser\Name;
+use App\Http\Controllers\QuizController;
 use Illuminate\Support\Facades\Route;
 
 Route::controller(HomeController::class)->group(function() {
@@ -16,4 +16,7 @@ Route::controller(HomeController::class)->group(function() {
     Route::middleware('auth')->group(function() {
         Route::post('/logout', 'logout')->name('home.logout');
     });
+});
+Route::controller(QuizController::class)->group(function() {
+    Route::get('/kuis', 'index');
 });
