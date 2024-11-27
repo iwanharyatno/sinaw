@@ -58,18 +58,22 @@
     </div>
 
     <!-- Quiz Options -->
-    <div class="grid grid-cols-2 gap-4 w-full max-w-2xl text-center">
+    <div  class="grid grid-cols-2 gap-4 w-full max-w-2xl text-center">
       <div class="bg-white rounded-lg p-6 shadow-lg hover:shadow-xl">
-        <img src="https://via.placeholder.com/64" alt="Kelas" class="mx-auto mb-4">
-        <p class="font-bold">Kelas</p>
+          <a href="{{ route('kelas.index') }}">
+              <img src="https://via.placeholder.com/64" alt="Kelas" class="mx-auto mb-4">
+              <p class="font-bold">Kelas</p>
+          </a>
       </div>
       <div class="bg-white rounded-lg p-6 shadow-lg hover:shadow-xl">
         <img src="https://via.placeholder.com/64" alt="Aktivitas" class="mx-auto mb-4">
         <p class="font-bold">Aktivitas</p>
       </div>
       <div class="bg-white rounded-lg p-6 shadow-lg hover:shadow-xl">
-        <img src="https://via.placeholder.com/64" alt="Jelajahi Kuis" class="mx-auto mb-4">
-        <p class="font-bold">Jelajahi Kuis</p>
+        <a href="{{ route('quiz.index') }}">
+            <img src="https://via.placeholder.com/64" alt="Jelajahi Kuis" class="mx-auto mb-4">
+              <p class="font-bold">Jelajahi Kuis</p>
+        </a>
       </div>
       <div class="bg-white rounded-lg p-6 shadow-lg hover:shadow-xl">
         <img src="https://via.placeholder.com/64" alt="Nongkrong" class="mx-auto mb-4">

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\KelasController;
 use App\Http\Controllers\QuizController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,5 +19,8 @@ Route::controller(HomeController::class)->group(function() {
     });
 });
 Route::controller(QuizController::class)->group(function() {
-    Route::get('/kuis', 'index');
+    Route::get('/kuis', 'index')-> name ('quiz.index');
+});
+Route::controller(KelasController::class)->group(function() {
+    Route::get('/kelas', 'index')-> name ('kelas.index');
 });
