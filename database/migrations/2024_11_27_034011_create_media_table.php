@@ -12,9 +12,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('question_images', function (Blueprint $table) {
+        Schema::create('media', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('question_id')->constrained('questions')->onDelete('cascade');
+            $table->integer('mediable_id');
+            $table->string('mediable_type');
             $table->string('file_path');
             $table->timestamp('uploaded_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamps();

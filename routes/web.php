@@ -18,9 +18,17 @@ Route::controller(HomeController::class)->group(function() {
         Route::post('/logout', 'logout')->name('home.logout');
     });
 });
+
 Route::controller(QuizController::class)->group(function() {
     Route::get('/kuis', 'index')-> name ('quiz.index');
+
+    Route::middleware('auth')->group(function() {
+        Route::get('/kuis/new', 'create')->name('quiz.create');
+    });
+    
+    Route::get('/kuis/{id}', 'show')->name('quiz.show');
 });
-Route::controller(KelasController::class)->group(function() {
+
+Route::controller(KelasController::class)->middleware('auth')->group(function() {
     Route::get('/kelas', 'index')-> name ('kelas.index');
 });
