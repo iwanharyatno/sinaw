@@ -1,3 +1,7 @@
+@import "./font-poppins.css";
+@import "./font-inter.css";
+@import "./font-fredoka.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

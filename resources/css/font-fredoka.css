@@ -1,0 +1,178 @@
+@font-face {
+    font-family: 'Fredoka';
+    src: url('./fonts/Fredoka/static/Fredoka-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Fredoka';
+    src: url('./fonts/Fredoka/static/Fredoka-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Fredoka';
+    src: url('./fonts/Fredoka/static/Fredoka-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Fredoka';
+    src: url('./fonts/Fredoka/static/Fredoka-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Fredoka';
+    src: url('./fonts/Fredoka/static/Fredoka-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+/* Condensed Variants */
+@font-face {
+    font-family: 'Fredoka Condensed';
+    src: url('./fonts/Fredoka/static/Fredoka_Condensed-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Fredoka Condensed';
+    src: url('./fonts/Fredoka/static/Fredoka_Condensed-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Fredoka Condensed';
+    src: url('./fonts/Fredoka/static/Fredoka_Condensed-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Fredoka Condensed';
+    src: url('./fonts/Fredoka/static/Fredoka_Condensed-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Fredoka Condensed';
+    src: url('./fonts/Fredoka/static/Fredoka_Condensed-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+/* Expanded Variants */
+@font-face {
+    font-family: 'Fredoka Expanded';
+    src: url('./fonts/Fredoka/static/Fredoka_Expanded-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Fredoka Expanded';
+    src: url('./fonts/Fredoka/static/Fredoka_Expanded-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Fredoka Expanded';
+    src: url('./fonts/Fredoka/static/Fredoka_Expanded-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Fredoka Expanded';
+    src: url('./fonts/Fredoka/static/Fredoka_Expanded-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Fredoka Expanded';
+    src: url('./fonts/Fredoka/static/Fredoka_Expanded-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+/* Semi-Condensed Variants */
+@font-face {
+    font-family: 'Fredoka SemiCondensed';
+    src: url('./fonts/Fredoka/static/Fredoka_SemiCondensed-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Fredoka SemiCondensed';
+    src: url('./fonts/Fredoka/static/Fredoka_SemiCondensed-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Fredoka SemiCondensed';
+    src: url('./fonts/Fredoka/static/Fredoka_SemiCondensed-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Fredoka SemiCondensed';
+    src: url('./fonts/Fredoka/static/Fredoka_SemiCondensed-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Fredoka SemiCondensed';
+    src: url('./fonts/Fredoka/static/Fredoka_SemiCondensed-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+/* Semi-Expanded Variants */
+@font-face {
+    font-family: 'Fredoka SemiExpanded';
+    src: url('./fonts/Fredoka/static/Fredoka_SemiExpanded-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Fredoka SemiExpanded';
+    src: url('./fonts/Fredoka/static/Fredoka_SemiExpanded-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Fredoka SemiExpanded';
+    src: url('./fonts/Fredoka/static/Fredoka_SemiExpanded-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Fredoka SemiExpanded';
+    src: url('./fonts/Fredoka/static/Fredoka_SemiExpanded-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Fredoka SemiExpanded';
+    src: url('./fonts/Fredoka/static/Fredoka_SemiExpanded-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
