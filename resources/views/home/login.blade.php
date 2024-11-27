@@ -43,8 +43,7 @@
 
       <!-- Masuk dengan Google -->
       <button class="w-full flex items-center justify-center gap-2 bg-white text-gray-800 py-2 rounded-lg hover:bg-gray-200">
-        <img src="https://via.placeholder.com/20" alt="Google Logo" class="w-5 h-5 " />
-        Masuk Menggunakan Google
+      <i class="fab fa-google mr-2"></i> Masuk Menggunakan Google
       </button>
     </div>
 
