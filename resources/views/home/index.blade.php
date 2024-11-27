@@ -7,10 +7,25 @@
   <!-- Header -->
   <div class="flex items-center justify-between px-6 py-4">
     <h1 class="text-4xl font-bold text-white">SinaW</h1>
-    <div class="flex gap-4">
-      <button class="bg-pink-500 text-white px-4 py-2 rounded-full hover:bg-pink-600">Daftar</button>
-      <button class="bg-pink-500 text-white px-4 py-2 rounded-full hover:bg-pink-600">Masuk</button>
-    </div>
+    @auth
+        <div class="relative rounded-full group p-2">
+            <img src="{{ $user->avatar ? $user->avatar : 'https://via.placeholder.com/64' }}" alt="Profile" class="w-10 h-10 rounded-full">
+            <div class="absolute divide-y top-full right-0 w-44 bg-white rounded-md -mt-1 hidden group-hover:block">
+                <ul>
+                    <li class="px-4 py-2 border-b-2"><strong>Account</strong></li>
+                    <li><form class="block" method="POST" action="{{ route('home.logout') }}">
+                        @csrf
+                        <button class="block w-full text-left px-4 py-2 hover:bg-slate-300 rounded-b-md">Logout</button>
+                    </form></li>
+                </ul>
+            </div>
+        </div>
+    @else
+        <div class="flex gap-4">
+            <a href="{{ route('home.register') }}" class="bg-pink-500 text-white px-4 py-2 rounded-full hover:bg-pink-600">Daftar</a>
+            <a href="{{ route('home.login') }}" class="bg-pink-500 text-white px-4 py-2 rounded-full hover:bg-pink-600">Masuk</a>
+        </div>
+    @endauth
   </div>
 
   <!-- Main Content -->
@@ -18,14 +33,18 @@
     <!-- Welcome Card -->
     <div class="bg-blue-500 text-white rounded-xl p-6 w-full max-w-lg flex items-center justify-between mb-8 shadow-lg">
       <div>
-        <p class="text-lg">Selamat Datang</p>
-        <h2 class="text-2xl font-bold">Dominic</h2>
-        <p class="flex items-center mt-2">
-          <span class="text-yellow-400 text-xl">&#9733;</span>
-          <span class="ml-2">Point 700</span>
-        </p>
+        <p class="text-lg">Selamat Datang!</p>
+        @auth
+            <h2 class="text-2xl font-bold">{{ $user->first_name }}</h2>
+            <p class="flex items-center mt-2">
+            <span class="text-yellow-400 text-xl">&#9733;</span>
+            <span class="ml-2">Point {{ $user->points }}</span>
+            </p>
+        @endauth
       </div>
-      <img src="https://via.placeholder.com/64" alt="Profile" class="w-16 h-16 rounded-full">
+      @auth
+        <img src="{{ $user->avatar ? $user->avatar : 'https://via.placeholder.com/64' }}" alt="Profile" class="w-16 h-16 rounded-full">
+      @endauth
     </div>
 
     <!-- Join Code Input -->

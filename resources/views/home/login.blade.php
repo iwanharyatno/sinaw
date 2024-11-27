@@ -9,20 +9,38 @@
     <!-- Bagian Kiri -->
     <div class="w-1/2 p-8 text-white">
       <h1 class="text-3xl font-bold mb-2">SinaW</h1>
-      <p class="text-sm mb-6">Belum Punya Akun? <a href="#" class="text-blue-400 underline">Buat Akun</a></p>
-      
+      <p class="text-sm mb-6">Belum Punya Akun? <a href="{{ route('home.register') }}" class="text-blue-400 underline">Buat Akun</a></p>
+      @error('general')
+        <div class="my-4 px-4 py-2 border-2 border-slate-500 rounded-lg bg-slate-600 bg-transparent text-white">
+          {{ $message }}
+        </div>
+      @enderror  
       <!-- Form -->
-      <form action="#" class="space-y-4">
-        <input
-          type="text"
-          placeholder="Username"
-          class="w-full px-4 py-2 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring focus:ring-blue-500"
-        />
-        <input
-          type="password"
-          placeholder="Kata Sandi"
-          class="w-full px-4 py-2 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring focus:ring-blue-500"
-        />
+      <form method="POST" action="{{ route('home.handle-login') }}" class="space-y-4">
+        @csrf
+        <div class="mb-4">
+            <input
+              type="text"
+              placeholder="Email"
+              value="{{ old("email") }}"
+              name="email"
+              class="w-full px-4 py-2 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring focus:ring-blue-500"
+            />
+            @error('email')
+                <span class="text-red-500 text-sm">{{ $message }}</span>
+            @enderror
+        </div>
+        <div class="mb-4">
+          <input
+            type="password"
+            name="password"
+            placeholder="Kata Sandi"
+            class="w-full px-4 py-2 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring focus:ring-blue-500"
+          />
+          @error('password')
+            <span class="text-red-500 text-sm">{{ $message }}</span>
+          @enderror
+        </div>
         <div class="text-right">
           <a href="#" class="text-blue-400 text-sm hover:underline">Lupa Password?</a>
         </div>

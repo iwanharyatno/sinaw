@@ -7,22 +7,29 @@
     <div class="bg-gray-900 text-white rounded-lg shadow-lg p-8 w-8/12 flex gap-8">
         <div class="w-8/12">
             <h1 class="text-3xl font-bold mb-2" style="font-family: 'Nunito', sans-serif;">Selamat Datang</h1>
-            <p class="mb-6">Sudah Punya Akun? <a href="#" class="text-blue-400">Masuk</a></p>
+            <p class="mb-6">Sudah Punya Akun? <a href="{{ route('home.login') }}" class="text-blue-400">Masuk</a></p>
+    
             <form method="POST" action="{{ route('home.handle-register') }}">
                 @csrf
                 <div class="flex space-x-4 mb-4">
                     <div class="w-1/2">
-                        <input type="text" placeholder="Nama*" class="w-full p-2 rounded bg-gray-700 text-white" name="fullname">
-                        @error('fullname')
+                        <input value="{{ old('first_name') }}" type="text" placeholder="Nama Depan*" class="w-full p-2 rounded bg-gray-700 text-white" name="first_name">
+                        @error('first_name')
                             <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="w-1/2">
-                        <input type="text" placeholder="Email*" class="w-full p-2 rounded bg-gray-700 text-white" name="email">
-                        @error('email')
+                        <input value="{{ old('last_name') }}" type="text" placeholder="Nama Belakang" class="w-full p-2 rounded bg-gray-700 text-white" name="last_name">
+                        @error('last_name')
                             <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
                     </div>
+                </div>
+                <div class="mb-4">
+                    <input value="{{ old('email') }}" type="text" placeholder="Email*" class="w-full p-2 rounded bg-gray-700 text-white" name="email">
+                    @error('email')
+                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                    @enderror
                 </div>
                 <div class="mb-4">
                     <input type="password" placeholder="Kata Sandi*" class="w-full p-2 rounded bg-gray-700 text-white" name="password">
@@ -31,8 +38,8 @@
                     @enderror
                 </div>
                 <div class="mb-4">
-                    <input type="password" placeholder="Konfirmasi Kata Sandi*" class="w-full p-2 rounded bg-gray-700 text-white" name="confirm_password">
-                    @error('confirm_password')
+                    <input type="password" placeholder="Konfirmasi Kata Sandi*" class="w-full p-2 rounded bg-gray-700 text-white" name="password_confirmation">
+                    @error('password_confirmation')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                     @enderror
                 </div>
