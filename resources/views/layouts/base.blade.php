@@ -9,7 +9,6 @@
     @stack('head')
 </head>
 <body>
-    <h1 class="text-blue-600">Iwan Haryatno</h1>
     @stack('body')
 </body>
 </html>
