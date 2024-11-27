@@ -66,8 +66,10 @@
           </a>
       </div>
       <div class="bg-white rounded-lg p-6 shadow-lg hover:shadow-xl">
-        <img src="https://via.placeholder.com/64" alt="Aktivitas" class="mx-auto mb-4">
-        <p class="font-bold">Aktivitas</p>
+        <a href="{{ route('aktivitas.index') }}">
+          <img src="https://via.placeholder.com/64" alt="Aktivitas" class="mx-auto mb-4">
+          <p class="font-bold">Aktivitas</p>
+        </a>
       </div>
       <div class="bg-white rounded-lg p-6 shadow-lg hover:shadow-xl">
         <a href="{{ route('quiz.index') }}">
@@ -76,8 +78,11 @@
         </a>
       </div>
       <div class="bg-white rounded-lg p-6 shadow-lg hover:shadow-xl">
-        <img src="https://via.placeholder.com/64" alt="Nongkrong" class="mx-auto mb-4">
-        <p class="font-bold">Nongkrong</p>
+        <a href="{{ route('nongkrong.index') }}">
+          <img src="https://via.placeholder.com/64" alt="Nongkrong" class="mx-auto mb-4">
+          <p class="font-bold">Nongkrong</p>
+
+        </a>
       </div>
     </div>
   </div>
