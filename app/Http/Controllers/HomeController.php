@@ -26,4 +26,8 @@ class HomeController extends Controller
             return back()->withErrors($validator->errors());
         }
     }
+ 
+    public function login() {
+        return view("home.login");
+    }
 }

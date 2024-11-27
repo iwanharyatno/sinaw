@@ -9,4 +9,5 @@ Route::controller(HomeController::class)->group(function() {
 
     // Handle login
     Route::post('/register', 'handleRegister')->name('home.handle-register');
+    Route::get('/login', 'login');
 });
