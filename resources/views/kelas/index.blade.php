@@ -1,26 +1,9 @@
-@extends('layouts.base')
+@extends('layouts.home')
 
 @section('title', 'Kelas | SINAW')
 
-@section('content')
-<nav class="bg-purple-800 p-4 flex justify-between items-center">
-    <div class="flex items-center gap-6 flex-grow text-white">
-      <h1 class="text-2xl font-bold text-white">Kelas</h1>
-      <ul class="flex gap-6 text-sm justify-center  items-center flex-grow">
-        <li><a href="#" class="hover:text-blue-300">Beranda</a></li>
-        <li><a href="#" class="hover:text-blue-300">Kelas</a></li>
-        <li><a href="#" class="hover:text-blue-300">Aktivitas Saya</a></li>
-        <li><a href="#" class="hover:text-blue-300">Artikel</a></li>
-        <li><a href="#" class="hover:text-blue-300">Kuis</a></li>
-      </ul>
-    </div>
-    <div class="flex items-center gap-4">
-      <div class="flex items-center bg-gray-200 rounded-full px-4 py-2">
-        <span class="text-gray-800">Dominic Dinand</span>
-        <div class="ml-2 w-8 h-8 rounded-full bg-gray-400 flex items-center justify-center"></div>
-      </div>
-    </div>
-  </nav>
+@section('Home_content')
+
 
   <!-- Konten Utama -->
   <div class="p-8 flex flex-col gap-6">

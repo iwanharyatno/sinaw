@@ -1,27 +1,12 @@
-@extends('layouts.base')
+@extends('layouts.home')
 
 @section('title', 'aktivitas | SinaW')
 
-@section('content')
+@section('Home_content')
 <body class="bg-gray-900 text-white min-h-screen">
 
   <!-- Navbar -->
-  <nav class="bg-gray-800 p-4 flex justify-between items-center">
-    <div class="flex items-center gap-6 flex-grow">
-      <h1 class="text-3xl font-bold text-white">SinaW</h1>
-      <ul class="flex gap-6 text-sm flex-grow justify-center items-center">
-        <li><a href="#" class="hover:text-purple-400">Beranda</a></li>
-        <li><a href="#" class="hover:text-purple-400">Kelas</a></li>
-        <li><a href="#" class="hover:text-purple-400">Aktivitas Saya</a></li>
-        <li><a href="#" class="hover:text-purple-400">Artikel</a></li>
-        <li><a href="#" class="hover:text-purple-400">Jelajahi Kuis</a></li>
-      </ul>
-    </div>
-    <div class="flex items-center gap-4">
-      <div class="w-8 h-8 rounded-full bg-gray-700"></div>
-      <span>Dominic Dinand</span>
-    </div>
-  </nav>
+  
 
   <!-- Main Content -->
   <div class="p-8">
