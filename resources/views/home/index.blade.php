@@ -54,7 +54,10 @@
     </div>
 
     <div class=" flex items-center mb-8 ">
+      <a href="{{ route('quiz.create') }}">
+
         <button class="bg-transparent text-white rounded-lg px-6 py-2 hover:bg-purple-700  "> Create Quiz</button>
+      </a>
     </div>
 
     <!-- Quiz Options -->

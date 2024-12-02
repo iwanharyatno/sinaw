@@ -1,28 +1,13 @@
-@extends('layouts.base')
+@extends('layouts.home')
 
 @section('title', 'Nongkrong | SinaW')
 
-@section('content')
+@section('Home_content')
 
 
 <div class="bg-blue-950">
 
-    <nav class=" p-4 flex justify-between items-center">
-        <div class="flex items-center gap-6 flex-grow">
-          <h1 class="text-3xl font-bold text-white">SinaW</h1>
-          <ul class="flex gap-6 text-sm text-white items-center flex-grow justify-center">
-            <li><a href="#" class="hover:text-purple-400">Beranda</a></li>
-            <li><a href="#" class="hover:text-purple-400">Kelas</a></li>
-            <li><a href="#" class="hover:text-purple-400">Aktivitas Saya</a></li>
-            <li><a href="#" class="hover:text-purple-400">Artikel</a></li>
-            <li><a href="#" class="hover:text-purple-400">Jelajahi Kuis</a></li>
-          </ul>
-        </div>
-        <div class="flex items-center gap-4 text-white">
-          <div class="w-8 h-8 rounded-full bg-white"></div>
-          <span>Dominic Dinand</span>
-        </div>
-      </nav>
+   
     
       <!-- Main Content -->
       <div class="p-8 flex gap-8">
