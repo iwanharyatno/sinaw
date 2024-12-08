@@ -11,7 +11,7 @@
                 <h1 class="text-2xl font-bold ml-2">Buat Kuis Baru</h1>
             </div>
             <div class="bg-white p-4 rounded-lg shadow-md">
-                <input type="text" placeholder="Tuliskan judul kuis" class="w-full p-2 mb-4 border rounded-lg" required>
+                <input type="text" placeholder="Tuliskan judul kuis" name="title" class="w-full p-2 mb-4 border rounded-lg" required>
                 <div class="w-full h-48 bg-gray-200 flex items-center justify-center mb-4 rounded-lg">
                     <span class="text-gray-500">Ubah Cover</span>
                 </div>
@@ -87,6 +87,8 @@
     }
 
     document.getElementById('quizForm').addEventListener('submit', function (event) {
+        event.preventDefault();
+
         const questions = document.querySelectorAll('#questions-wrapper .question');
         let isValid = true;
 
@@ -101,6 +103,14 @@
         if (!isValid) {
             event.preventDefault();
         }
+
+        const form = document.getElementById('quizForm');
+        const formData = new FormData(form);
+
+        fetch(form.getAttribute('action'), {
+            method: 'POST',
+            body: formData
+        }).then(res => res.text()).then(txt => console.log(txt));
     });
 </script>
 @endpush

@@ -3,20 +3,31 @@
 @section('title', 'Detail Kuis | SINAW')
 
 @section('content')
-    <html lang="en">
+
+@php
+$difficulty = 'Mudah';
+
+if ($quiz->difficulty == 'medium') {
+    $difficulty = 'Medium';
+} elseif ($quiz->difficulty == 'hard') {
+    $difficulty = 'Sulit';
+}
+@endphp
     <div class="bg-gray-800 text-white font-sans min-h-screen">
         <div class="p-4">
             <div class="flex justify-between items-center mb-4">
                 <h1 class="text-lg">
                     Detail Kuis
                 </h1>
+                @auth
                 <div class="flex items-center">
                     <div class="w-8 h-8 bg-gray-600 rounded-full mr-2">
                     </div>
                     <span>
-                        Dominic Dinand
+                        {{ auth()->user()->first_name }}
                     </span>
                 </div>
+                @endauth
             </div>
             <div class="bg-gray-700 p-6 rounded-lg flex max-w-screen-lg mx-auto">
                 <div class="w-2/3">
@@ -26,7 +37,7 @@
                             </i>
                         </a>
                         <h2 class="text-xl">
-                            Kuis/Logika Matematika
+                            {{ $quiz->quiz_name }}
                         </h2>
                     </div>
                     <div class="bg-yellow-400 p-4 rounded-lg mb-4">
@@ -35,7 +46,7 @@
                             width="600" />
                     </div>
                     <h3 class="text-2xl mb-2">
-                        Logika Matematika
+                        {{ $quiz->quiz_name }}
                     </h3>
                     <div class="flex items-center mb-2">
                         <i class="fas fa-tachometer-alt mr-2">
@@ -44,7 +55,7 @@
                             Tingkat Kesulitan
                         </span>
                         <span class="bg-gray-600 text-white px-2 py-1 rounded">
-                            Sedang
+                            {{ $difficulty }}
                         </span>
                     </div>
                     <div class="flex items-center mb-4">
@@ -54,16 +65,17 @@
                             Durasi Waktu
                         </span>
                         <span class="ml-2">
-                            1 Jam
+                            @php
+                                $diffArr = explode(
+                                    " ",
+                                    Carbon\Carbon::now()->addMinutes($quiz->questions->count())->locale('id')->diffForHumans()
+                                );
+                            @endphp
+                            {{ $diffArr[0] . " " . $diffArr[1] }}
                         </span>
                     </div>
                     <p class="text-gray-300 mb-4">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris euismod dignissim sapien ut
-                        tincidunt. Interdum et malesuada fames ac ante ipsum primis in faucibus. Phasellus risus erat,
-                        fringilla id risus ac, dapibus aliquet quam. Curabitur nec arcu id nisl posuere suscipit. Morbi
-                        euismod, mauris et porta tristique, magna sapien cursus odio, eget sagittis nisi urna id libero.
-                        Donec lacus sapien, maximus ac volutpat eget, gravida ac elit. Ut varius efficitur dui, et viverra
-                        dolor convallis a.
+                        {{ $quiz->description }}
                     </p>
                 </div>
                 <div class="w-1/3 pl-6">

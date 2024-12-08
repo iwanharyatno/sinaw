@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('class_id')->nullable()->constrained('kelas')->onDelete('set null');
             $table->string('quiz_name');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->foreignId('created_by')->constrained('users')->onDelete('cascade');
             $table->boolean('is_public')->default(false);
             $table->enum('difficulty', ['easy', 'medium', 'hard']);
