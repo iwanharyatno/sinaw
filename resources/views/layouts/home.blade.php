@@ -24,6 +24,9 @@
         <a href="{{ route('quiz.create') }}" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition">
           + Buat Kuis
         </a>
+        <a href="{{ route('quiz.index-mine') }}" class="bg-transparent text-green-500 px-4 py-2 rounded-lg hover:bg-green-500 hover:text-white transition">
+          Kuis Saya
+        </a>
         <div class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center">
           <span class="text-white font-bold">{{ auth()->user()->first_name[0] }}</span> <!-- Ganti dengan gambar profil -->
         </div>

@@ -16,8 +16,20 @@ class QuizController extends Controller
         return view('kuis.index', compact('quizes'));
     }
 
+    public function indexMine(){
+        $user = User::find(Auth::user()->id);
+        $quizes = $user->quizzes()->with('questions.answers')->orderBy('created_at', 'desc')->get();
+
+        return view('kuis.mine', compact('quizes'));
+    }
+
     public function show($id) {
         $quiz = Quiz::with('questions')->find($id);
+        return view('kuis.show', compact('quiz'));
+    }
+
+    public function edit($id) {
+        $quiz = Quiz::with('questions.answers')->find($id);
         return view('kuis.show', compact('quiz'));
     }
 

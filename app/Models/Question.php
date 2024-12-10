@@ -11,7 +11,7 @@ class Question extends Model
     ];
 
     public function quiz() {
-        return $this->hasOne(Quiz::class, 'quiz_id', 'id');
+        return $this->belongsTo(Quiz::class, 'quiz_id', 'id');
     }
 
     public function answers() {

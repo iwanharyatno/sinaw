@@ -7,7 +7,7 @@
         <form class="max-w-4xl mx-auto p-4" method="POST" action="{{ route('quiz.store') }}" id="quizForm">
             @csrf
             <div class="flex items-center mb-4">
-                <i class="fas fa-arrow-left text-2xl"></i>
+                <a href="/kuis"><i class="fas fa-arrow-left text-2xl"></i></a>
                 <h1 class="text-2xl font-bold ml-2">Buat Kuis Baru</h1>
             </div>
             <div class="bg-white p-4 rounded-lg shadow-md">

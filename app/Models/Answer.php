@@ -9,6 +9,6 @@ class Answer extends Model
     protected $guarded = ['id'];
 
     public function question() {
-        return $this->hasOne(Question::class, 'question_id', 'id');
+        return $this->belongsTo(Question::class, 'question_id', 'id');
     }
 }
