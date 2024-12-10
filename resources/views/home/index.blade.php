@@ -69,13 +69,13 @@
       </div>
       <div class="bg-white rounded-lg p-6 shadow-lg hover:shadow-xl">
         <a href="{{ route('quiz.index') }}">
-          <img src="https://via.placeholder.com/64" alt="Jelajahi Kuis" class="mx-auto mb-4">
+          <img src="{{ asset('/asset/view-page.gif') }}" alt="Jelajahi Kuis" class="mx-auto w-20 mb-4">
           <p class="font-bold">Jelajahi Kuis</p>
         </a>
       </div>
       <div class="bg-white rounded-lg p-6 shadow-lg hover:shadow-xl col-span-2">
         <a href="{{ route('nongkrong.index') }}">
-          <img src="https://via.placeholder.com/64" alt="Nongkrong" class="mx-auto mb-4">
+          <img src="{{ asset('/asset/talk.gif') }}" alt="Nongkrong" class="mx-auto w-20 mb-4">
           <p class="font-bold">Nongkrong</p>
         </a>
       </div>
