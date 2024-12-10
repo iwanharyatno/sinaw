@@ -34,6 +34,7 @@ Route::controller(QuizController::class)->group(function() {
         Route::post('/kuis/update/{id}', 'update')->name('quiz.update');
     });
     
+    Route::get('/kuis/join/{id}', 'join')-> name ('quiz.join');
     Route::get('/kuis/{id}', 'show')->name('quiz.show');
 });
 

@@ -50,7 +50,7 @@
     <!-- Join Code Input -->
     <div class="flex items-center gap-2 mb-6 w-full max-w-lg">
       <input type="text" placeholder="Enter a join code" class="flex-grow px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring focus:ring-blue-300">
-      <button class="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700">Join</button>
+      <a href="" class="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700">Join</a>
     </div>
 
     <div class="flex items-center mb-8">
@@ -69,13 +69,13 @@
       </div>
       <div class="bg-white rounded-lg p-6 shadow-lg hover:shadow-xl">
         <a href="{{ route('quiz.index') }}">
-          <img src="https://via.placeholder.com/64" alt="Jelajahi Kuis" class="mx-auto mb-4">
+          <img src="{{ asset('/asset/view-page.gif') }}" alt="Jelajahi Kuis" class="mx-auto w-20 mb-4">
           <p class="font-bold">Jelajahi Kuis</p>
         </a>
       </div>
       <div class="bg-white rounded-lg p-6 shadow-lg hover:shadow-xl col-span-2">
         <a href="{{ route('nongkrong.index') }}">
-          <img src="https://via.placeholder.com/64" alt="Nongkrong" class="mx-auto mb-4">
+          <img src="{{ asset('/asset/talk.gif') }}" alt="Nongkrong" class="mx-auto w-20 mb-4">
           <p class="font-bold">Nongkrong</p>
         </a>
       </div>

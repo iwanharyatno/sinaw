@@ -50,8 +50,8 @@
                             <p class="text-sm text-gray-700 mb-4">
                                 {{ Carbon\Carbon::parse($quiz->created_at)->locale('id')->diffForHumans() }}</p>
                         </a>
-                        <button class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">Mulai
-                            Langsung</button>
+                        <a href="{{ route('quiz.join', $quiz->id) }}" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">Mulai
+                            Langsung</a>
                     </div>
                     <!-- Salin kartu di atas untuk mengisi grid -->
                 @endforeach
