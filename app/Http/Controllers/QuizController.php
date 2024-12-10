@@ -84,4 +84,11 @@ class QuizController extends Controller
             'data' => $quiz 
         ]);
     }
+
+    public function delete($id) {
+        $quiz = Quiz::find($id);
+        $quiz->delete();
+
+        return back();
+    }
 }

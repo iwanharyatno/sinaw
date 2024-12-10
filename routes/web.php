@@ -27,9 +27,10 @@ Route::controller(QuizController::class)->group(function() {
     Route::middleware('auth')->group(function() {
         Route::get('/kuis/new', 'create')->name('quiz.create');
         Route::post('/kuis/new', 'store')->name('quiz.store');
-        Route::post('/kuis/mine', 'indexMine')->name('quiz.index-mine');
-        
+        Route::get('/kuis/mine', 'indexMine')->name('quiz.index-mine');
+
         Route::post('/kuis/edit/{id}', 'edit')->name('quiz.edit');
+        Route::post('/kuis/delete/{id}', 'delete')->name('quiz.delete');
     });
     
     Route::get('/kuis/{id}', 'show')->name('quiz.show');
