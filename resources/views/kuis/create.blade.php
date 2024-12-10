@@ -111,7 +111,7 @@
             method: 'POST',
             body: formData
         })
-        .then(response => {
+         .then(response => {
         if (response.ok) {
             return response.json(); // Asumsi server mengembalikan respons JSON
         }
@@ -119,12 +119,22 @@
     })
     .then(data => {
         // Tampilkan alert jika berhasil
-        alert('Kuis berhasil dibuat!');
-        window.location.href = "{{ route('quiz.index') }}"; // Redirect ke halaman daftar kuis
+        Swal.fire({
+            icon: 'success',
+            title: 'Kuis Berhasil Dibuat!',
+            text: 'Kuis Anda telah berhasil disimpan.',
+            confirmButtonText: 'Lihat Daftar Kuis',
+        }).then(() => {
+            window.location.href = "{{ route('quiz.index') }}"; // Redirect ke halaman daftar kuis
+        });
     })
     .catch(error => {
         console.error('Error:', error);
-        alert('Gagal membuat kuis. Silakan coba lagi.');
+        Swal.fire({
+            icon: 'error',
+            title: 'Gagal Membuat Kuis',
+            text: 'Silakan coba lagi nanti.',
+        });
     });
 
     });
