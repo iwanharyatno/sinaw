@@ -3,10 +3,10 @@
 @section('title', 'Home | SINAW')
 
 @section('content')
-<div class=" font-poppins bg-gradient-to-b from-gray-800 to-blue-900 min-h-screen flex flex-col">
+<div class="font-poppins bg-gradient-to-b from-gray-800 to-blue-900 min-h-screen flex flex-col">
   <!-- Header -->
   <div class="flex items-center justify-between px-6 py-4">
-    <h1 class="text-4xl font-bold text-white">SinaW</h1>
+    <h1 class="text-4xl font-bold text-white">Sina<span class="text-purple-400">W</span></h1>
     @auth
         <div class="relative rounded-full group p-2">
             <img src="{{ $user->avatar ? $user->avatar : 'https://via.placeholder.com/64' }}" alt="Profile" class="w-10 h-10 rounded-full">
@@ -31,7 +31,7 @@
   <!-- Main Content -->
   <div class="flex-grow flex flex-col items-center justify-center px-6">
     <!-- Welcome Card -->
-    <div class="bg-blue-500 text-white rounded-xl p-6 w-full max-w-lg flex items-center justify-between mb-8 shadow-lg">
+    <div class="bg-purple-700 text-white rounded-xl p-6 w-full max-w-lg flex items-center justify-between mb-8 shadow-lg">
       <div>
         <p class="text-lg">Selamat Datang!</p>
         @auth
@@ -53,38 +53,30 @@
       <button class="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700">Join</button>
     </div>
 
-    <div class=" flex items-center mb-8 ">
+    <div class="flex items-center mb-8">
       <a href="{{ route('quiz.create') }}">
-
-        <button class="bg-transparent text-white rounded-lg px-6 py-2 hover:bg-purple-700  "> Create Quiz</button>
+        <button class="bg-transparent text-white rounded-lg px-6 py-2 hover:bg-purple-700">Create Quiz</button>
       </a>
     </div>
 
     <!-- Quiz Options -->
-    <div  class="grid grid-cols-2 gap-4 w-full max-w-2xl text-center">
-      <div class="bg-white rounded-lg p-6 shadow-lg hover:shadow-xl">
-          <a href="{{ route('kelas.index') }}">
-              <img src="https://via.placeholder.com/64" alt="Kelas" class="mx-auto mb-4">
-              <p class="font-bold">Kelas</p>
-          </a>
-      </div>
+    <div class="grid grid-cols-2 gap-4 w-full max-w-2xl mb-20 text-center">
       <div class="bg-white rounded-lg p-6 shadow-lg hover:shadow-xl">
         <a href="{{ route('aktivitas.index') }}">
-          <img src="https://via.placeholder.com/64" alt="Aktivitas" class="mx-auto mb-4">
+          <img src="{{ asset('/asset/aktiviti.gif') }}" alt="Aktivitas" class="mx-auto w-20 mb-4">
           <p class="font-bold">Aktivitas</p>
         </a>
       </div>
       <div class="bg-white rounded-lg p-6 shadow-lg hover:shadow-xl">
         <a href="{{ route('quiz.index') }}">
-            <img src="https://via.placeholder.com/64" alt="Jelajahi Kuis" class="mx-auto mb-4">
-              <p class="font-bold">Jelajahi Kuis</p>
+          <img src="https://via.placeholder.com/64" alt="Jelajahi Kuis" class="mx-auto mb-4">
+          <p class="font-bold">Jelajahi Kuis</p>
         </a>
       </div>
-      <div class="bg-white rounded-lg p-6 shadow-lg hover:shadow-xl">
+      <div class="bg-white rounded-lg p-6 shadow-lg hover:shadow-xl col-span-2">
         <a href="{{ route('nongkrong.index') }}">
           <img src="https://via.placeholder.com/64" alt="Nongkrong" class="mx-auto mb-4">
           <p class="font-bold">Nongkrong</p>
-
         </a>
       </div>
     </div>
