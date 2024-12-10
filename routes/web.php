@@ -29,6 +29,7 @@ Route::controller(QuizController::class)->group(function() {
         Route::post('/kuis/new', 'store')->name('quiz.store');
     });
     
+    Route::get('/kuis/join/{id}', 'join')-> name ('quiz.join');
     Route::get('/kuis/{id}', 'show')->name('quiz.show');
 });
 

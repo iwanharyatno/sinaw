@@ -25,6 +25,10 @@ class QuizController extends Controller
         return view('kuis.create');
     }
 
+    public function join($id) {
+        $quiz = Quiz::with('questions')->find($id);
+        return view('kuis.join', compact('quiz'));
+    }
     public function store(Request $request) {
         $validator = Validator::make($request->all(), [
             'title' => 'required|string|max:255',
@@ -71,5 +75,8 @@ class QuizController extends Controller
             'success' => true,
             'data' => $quiz 
         ]);
+
+        
     }
+    
 }

@@ -50,7 +50,7 @@
     <!-- Join Code Input -->
     <div class="flex items-center gap-2 mb-6 w-full max-w-lg">
       <input type="text" placeholder="Enter a join code" class="flex-grow px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring focus:ring-blue-300">
-      <button class="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700">Join</button>
+      <a href="" class="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700">Join</a>
     </div>
 
     <div class="flex items-center mb-8">
