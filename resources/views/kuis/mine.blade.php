@@ -37,6 +37,11 @@
                             <p class="text-sm text-gray-700 mb-4">
                                 {{ Carbon\Carbon::parse($quiz->created_at)->locale('id')->diffForHumans() }}</p>
                         </a>
+                        <a href="{{ route('quiz.edit', $quiz->id) }}" class="inline-block w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition text-center mb-2">Edit</a>
+                        <form action="{{ route('quiz.delete', $quiz->id) }}" method="post" onsubmit="return confirm('Yakin ingin menghapus data ini?')">
+                            @csrf
+                            <button class="w-full bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 transition">Hapus</button>
+                        </form>
                     </div>
                     <!-- Salin kartu di atas untuk mengisi grid -->
                 @endforeach

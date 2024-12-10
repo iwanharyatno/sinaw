@@ -29,8 +29,9 @@ Route::controller(QuizController::class)->group(function() {
         Route::post('/kuis/new', 'store')->name('quiz.store');
         Route::get('/kuis/mine', 'indexMine')->name('quiz.index-mine');
 
-        Route::post('/kuis/edit/{id}', 'edit')->name('quiz.edit');
+        Route::get('/kuis/edit/{id}', 'edit')->name('quiz.edit');
         Route::post('/kuis/delete/{id}', 'delete')->name('quiz.delete');
+        Route::post('/kuis/update/{id}', 'update')->name('quiz.update');
     });
     
     Route::get('/kuis/{id}', 'show')->name('quiz.show');
