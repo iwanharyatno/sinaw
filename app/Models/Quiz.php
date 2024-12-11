@@ -17,4 +17,8 @@ class Quiz extends Model
     public function user() {
         return $this->belongsTo(User::class, 'created_by', 'id');
     }
+
+    public function attempts() {
+        return $this->hasMany(QuizAttempt::class, 'quiz_id', 'id');
+    }
 }
