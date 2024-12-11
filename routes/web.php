@@ -46,6 +46,13 @@ Route::controller(KelasController::class)->middleware('auth')->group(function() 
 });
 Route::controller(NongkrongController::class)->group(function() {
     Route::get('/nongkrong', 'index')-> name ('nongkrong.index');
+
+    Route::middleware('auth')->group(function() {
+
+    Route::get('/nongkrong/create', 'create')-> name ('nongkrong.create');
+    Route::get('/nongkrong/reply', 'reply')-> name ('nongkrong.reply');
+
+    });
 });
 Route::controller(AktivitasController::class)->group(function() {
     Route::middleware('auth')->group(function() {
