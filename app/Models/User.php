@@ -50,4 +50,8 @@ class User extends Authenticatable
     public function quizzes() {
         return $this->hasMany(Quiz::class, 'created_by', 'id');
     }
+
+    public function quizAttempts() {
+        return $this->hasMany(QuizAttempt::class, 'user_id', 'id');
+    }
 }
