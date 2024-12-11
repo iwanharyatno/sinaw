@@ -32,9 +32,12 @@ Route::controller(QuizController::class)->group(function() {
         Route::get('/kuis/edit/{id}', 'edit')->name('quiz.edit');
         Route::post('/kuis/delete/{id}', 'delete')->name('quiz.delete');
         Route::post('/kuis/update/{id}', 'update')->name('quiz.update');
-    });
     
-    Route::get('/kuis/join/{id}', 'join')-> name ('quiz.join');
+        Route::get('/kuis/join/{id}', 'join')-> name ('quiz.join');
+        Route::post('/kuis/join/{id}', 'attempt')-> name ('quiz.attempt');
+        Route::get('/kuis/play/{id}', 'play')-> name ('quiz.play');
+    });
+
     Route::get('/kuis/{id}', 'show')->name('quiz.show');
 });
 
@@ -45,5 +48,7 @@ Route::controller(NongkrongController::class)->group(function() {
     Route::get('/nongkrong', 'index')-> name ('nongkrong.index');
 });
 Route::controller(AktivitasController::class)->group(function() {
-    Route::get('/aktivitas', 'index')-> name ('aktivitas.index');
+    Route::middleware('auth')->group(function() {
+        Route::get('/aktivitas', 'index')-> name ('aktivitas.index');
+    });
 });

@@ -167,6 +167,41 @@ class QuizController extends Controller
         ]);
     }
 
+    public function play($id) {
+        $quiz = Quiz::with('questions.answers')->find($id);
+        return view('kuis.play', compact('quiz'));
+    }
+
+    public function attempt(Request $request, $id) {
+        $validator = Validator::make($request->all(), [
+            'score' => 'required|numeric',
+            'points' => 'required|numeric'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'errors' => $validator->errors(),
+            ], 422);
+        }
+
+        $data = $validator->validated();
+        $quiz = Quiz::find($id);
+
+        $attempt = $quiz->attempts()->create([
+            'user_id' => Auth::user()->id,
+            'score' => $data['score']
+        ]);
+        $user = User::find(Auth::user()->id);
+        $user->points += intval($data['points']);
+        $user->save();
+
+        return response([
+            'success' => true,
+            'attempt' => $attempt
+        ]);
+    }
+
     public function delete($id) {
         $quiz = Quiz::find($id);
         $quiz->delete();
