@@ -3,9 +3,9 @@
 @section('title', 'Tambah Update Baru | SINAW')
 
 @section('content')
-<<div class="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-6">
+<div class="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-6">
     <h2 class="text-xl font-bold text-gray-700 mb-4">Buat Tulisan Baru</h2>
-    <form action="" method="POST">
+    <form action="{{ route('nongkrong.store') }}" method="POST">
         @csrf
         <div class="mb-4">
             <label for="title" class="block text-sm font-medium text-gray-700">Judul</label>
@@ -36,11 +36,12 @@
                 id="category"
                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
             >
-                <option value="matematika">Matematika</option>
-                <option value="sains">Sains</option>
-                <option value="teknologi">Teknologi</option>
-                <option value="komputer">Komputer</option>
-                <option value="filosofi">Filosofi</option>
+                <option value="Lainnya">Lainnya</option>
+                <option value="Matematika">Matematika</option>
+                <option value="Sains">Sains</option>
+                <option value="Teknologi">Teknologi</option>
+                <option value="Komputer">Komputer</option>
+                <option value="Filosofi">Filosofi</option>
             </select>
         </div>
         <div class="flex justify-end space-x-4">

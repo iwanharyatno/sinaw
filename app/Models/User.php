@@ -54,4 +54,8 @@ class User extends Authenticatable
     public function quizAttempts() {
         return $this->hasMany(QuizAttempt::class, 'user_id', 'id');
     }
+
+    public function threads() {
+        return $this->hasMany(ThreadDiscussion::class, 'user_id', 'id');
+    }
 }

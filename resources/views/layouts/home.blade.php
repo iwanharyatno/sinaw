@@ -4,9 +4,9 @@
 
 @section('content')
 
-<body class="bg-gray-800 font-poppins text-white min-h-screen">
+<body class="bg-gray-800 font-poppin min-h-screen">
   <!-- Navbar -->
-  <nav class="bg-gray-900 p-4 flex justify-between items-center h-16">
+  <nav class="bg-gray-900 p-4 flex text-white justify-between items-center h-16">
 
   <div class="flex items-center gap-4 h-full flex-grow">
   <h1 class="text-2xl font-bold text-white">Sina<span class="text-purple-400">W</span></h1>
