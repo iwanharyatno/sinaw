@@ -2,8 +2,17 @@
 
 @section('title', 'Tambah Quiz Baru | SINAW')
 
+@push('head')
+    @vite('resources/js/app.js')
+@endpush
+
 @section('content')
     <div class="bg-gray-100 min-h-screen">
+        <div class="flex items-center justify-center flex-col max-w-56 mx-auto pt-8">
+            <textarea class="w-full p-2 mb-4 border rounded-lg" id="aiPrompt" placeholder="generate with AI"></textarea>
+            <button id="generateButton"
+                class="w-full px-4 py-2 text-white bg-blue-500 rounded-lg disabled:bg-blue-200">Generate</button>
+        </div>
         <form class="max-w-4xl mx-auto p-4" method="POST" action="{{ route('quiz.store') }}" id="quizForm">
             @csrf
             <div class="flex items-center mb-4">
@@ -12,7 +21,7 @@
             </div>
             <div class="bg-white p-4 rounded-lg shadow-md">
                 <input type="text" placeholder="Tuliskan judul kuis" name="title"
-                    class="w-full p-2 mb-4 border rounded-lg" required>
+                    class="w-full p-2 mb-4 border rounded-lg" required id="title">
                 <div class="w-full h-48 bg-gray-200 flex items-center justify-center mb-4 rounded-lg bg-contain bg-no-repeat bg-center"
                     id="header_image">
                     <span class="text-gray-500">Ubah Cover</span>
@@ -42,6 +51,12 @@
         const btnSimpan = document.getElementById('btnSimpan');
         const fileUpload = document.getElementById('header_image_file');
         const progressElement = document.getElementById('uploadProgress');
+
+        const generateButton = document.getElementById('generateButton');
+
+        generateButton.addEventListener('click', function() {
+            generateQuestions(document.getElementById('aiPrompt').value);
+        });
 
         function addQuestion() {
             const questionHtml = `
@@ -205,5 +220,84 @@
             document.getElementById('header_image').style.backgroundImage = "url(" + URL.createObjectURL(this.files[
                 0]) + ")";
         });
+
+        function generateQuestions(prompt) {
+            console.log(prompt);
+            const result = window.aiModel.generateContent(prompt);
+            generateButton.setAttribute('disabled', 'true');
+            generateButton.innerText = "Generating...";
+            result.then((res) => {
+                    const quiz = JSON.parse(res.response.text().replace('```json', '').replace('```', '').trim());
+
+                    console.log(quiz);
+
+                    let questionHtml = '';
+                    document.getElementById('title').value = quiz.title;
+                    quiz.questions.forEach(question => {
+                        let answers = '';
+                        let answerIndex = 0;
+
+                        question.answers.forEach(answer => {
+                            answers += `
+                            <div class="flex items-center answer" id="answer${questionIndex}a${answerIndex}">
+                                <input type="text" placeholder="Opsi ${answerIndex+1}" class="w-full p-2 border rounded-lg" value="${answer.answer_text}" name="questions[${questionIndex}][answers][${answerIndex}][text]" required>
+                                @error('questions.${questionIndex}.answers.${answerIndex}.text')
+                                    <span class="text-sm text-red-500 block">{{ $message }}</span>
+                                @enderror
+                                <input type="checkbox" class="ml-2" name="questions[${questionIndex}][answers][${answerIndex}][is_correct]" ${answer.is_correct ? 'checked' : ''}>
+                                <button type="button" onclick="deleteAnswer(${questionIndex}, ${answerIndex})" class="text-red-500 cursor-pointer mb-4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                                        <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                                    </svg>
+                                </button>
+                            </div>`;
+                            answerIndex++;
+                        });
+
+                        questionHtml += `
+                        <div class="p-4 bg-gray-100 rounded-lg question" id="question${questionIndex}">
+                            <button type="button" onclick="deleteQuestion(${questionIndex})" class="text-red-500 cursor-pointer mb-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                                    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                                </svg>
+                            </button>
+                            <input type="text" value="${question.question_text}" name="questions[${questionIndex}][text]" placeholder="Tuliskan soal..." class="w-full p-2 mb-2 border rounded-lg" required>
+                            @error('questions.${questionIndex}.text')
+                                <span class="text-sm text-red-500 block">{{ $message }}</span>
+                            @enderror
+                            <div class="flex items-center mb-2">
+                                <button class="flex items-center text-red-500">
+                                    <i class="fas fa-plus-circle mr-2"></i>Tambah Media
+                                </button>
+                                <select class="ml-auto p-2 border rounded-lg" name="questions[${questionIndex}][question_type]">
+                                    <option value="MCQ">Pilihan Ganda</option>
+                                    <option value="Short Answer">Isian Singkat</option>
+                                </select>
+                            </div>
+                            <div class="space-y-2">
+                            ${answers}
+                            </div>
+                            <button class="w-full p-2 text-blue-500 border rounded-lg" type="button" onclick="addAnswer(this, ${questionIndex})">+ Tambah opsi jawaban</button>
+                        </div>
+                        `;
+                        questionIndex++;
+                    });
+                    document.getElementById('questions-wrapper').insertAdjacentHTML('beforeend', questionHtml);
+                })
+                .catch((err) => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal membuat kuis',
+                        text: 'Terdapat sedikit kesalahan, coba beberapa saat lagi.'
+                    });
+                    console.error(err);
+                })
+                .finally(() => {
+                    generateButton.removeAttribute('disabled');
+                    generateButton.innerText = "Generate";
+                });
+        }
     </script>
 @endpush
