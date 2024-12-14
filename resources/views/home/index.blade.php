@@ -13,6 +13,7 @@
             <div class="absolute divide-y top-full right-0 w-44 bg-white rounded-md -mt-1 hidden group-hover:block">
                 <ul>
                     <li class="px-4 py-2 border-b-2"><strong>Account</strong></li>
+                    <li><a href="{{ route('user.profile') }}" class="block w-full text-left px-4 py-2 hover:bg-slate-300 rounded-b-md">Edit Profile</a></li>
                     <li><form class="block" method="POST" action="{{ route('home.logout') }}">
                         @csrf
                         <button class="block w-full text-left px-4 py-2 hover:bg-slate-300 rounded-b-md">Logout</button>

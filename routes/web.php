@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\NongkrongController;
 use App\Http\Controllers\QuizController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::controller(HomeController::class)->group(function () {
@@ -57,5 +58,12 @@ Route::controller(NongkrongController::class)->group(function () {
 Route::controller(AktivitasController::class)->group(function () {
     Route::middleware('auth')->group(function () {
         Route::get('/aktivitas', 'index')->name('aktivitas.index');
+    });
+});
+
+Route::controller(UserController::class)->group(function () {
+    Route::middleware('auth')->group(function () {
+        Route::get('profile', 'editProfile')->name('user.profile');
+        Route::post('profile', 'saveProfile')->name('user.profile-save');
     });
 });
