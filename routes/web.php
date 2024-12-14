@@ -51,6 +51,7 @@ Route::controller(NongkrongController::class)->group(function () {
     Route::get('/nongkrong/{threadId}/replies', 'reply')->name('nongkrong.reply');
     Route::middleware('auth')->group(function () {
         Route::get('/nongkrong/create', 'create')->name('nongkrong.create');
+        Route::get('/nongkrong/mine', 'mine')->name('nongkrong.mine');
         Route::post('/nongkrong/create', 'store')->name('nongkrong.store');
         Route::post('/nongkrong/{threadId}/replies', 'storeReply')->name('nongkrong.store-reply');
     });
