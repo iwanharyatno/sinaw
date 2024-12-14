@@ -2,7 +2,33 @@
 
 @section('title', 'Nongkrong | SinaW')
 
-@section('Home_content')
+@section('content')
+
+<nav class="bg-gray-900 p-4 flex text-white justify-between items-center h-16">
+
+  <div class="flex items-center gap-4 h-full flex-grow">
+  <h1 class="text-2xl font-bold text-white">Sina<span class="text-purple-400">W</span></h1>
+  <ul class="flex gap-10 justify-center items-center flex-grow">
+    <li><a href="{{ route('home.index') }}" class="hover:text-blue-400">Beranda</a></li>
+    <li><a href="{{ route('aktivitas.index') }}" class="hover:text-blue-400">Aktivitas Saya</a></li>
+    <li><a href="{{ route('nongkrong.index') }}" class="hover:text-blue-400">Nongkrong</a></li>
+    <li><a href="{{ route('quiz.index') }}" class="hover:text-blue-400">Kuis</a></li>
+  </ul>
+</div>
+
+          <div class="flex items-center gap-4">
+        <a href="{{ route('nongkrong.create') }}" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition">
+          + Tuliskan 
+        </a>
+        <a href="{{ route('nongkrong.mine') }}" class="bg-transparent text-green-500 px-4 py-2 rounded-lg hover:bg-green-500 hover:text-white transition">
+          Tulisan Saya
+        </a>
+        <div class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center">
+          <span class="text-white font-bold">{{ auth()->user()->first_name[0] }}</span> <!-- Ganti dengan gambar profil -->
+        </div>
+      </div>
+  
+  </nav>
     <div class="bg-blue-950 min-h-screen">
         <!-- Main Content -->
         <div class="p-8 flex gap-8 container mx-auto">

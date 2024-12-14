@@ -24,6 +24,10 @@ class NongkrongController extends Controller
         return view('nongkrong.create');
     }
 
+    public function mine(){
+        return view('nongkrong.mine');
+    }
+
     public function reply($threadId){
         $thread = ThreadDiscussion::with('replies.user')->find($threadId);
 
