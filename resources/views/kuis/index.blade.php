@@ -22,23 +22,25 @@
                 </select>
                 <button class="bg-gray-700 text-white px-4 py-2 rounded-lg">Reset</button>
                 <button class="bg-gray-700 text-white px-4 py-2 rounded-lg">Tambah Filter</button>
-                <input type="text" placeholder="Cari Kuis Disini..."
-                    class="flex-grow bg-gray-900 text-white px-4 py-2 rounded-lg border border-gray-700 focus:outline-none focus:ring focus:ring-blue-500" />
-                <button class="bg-gray-700 px-4 py-2 rounded-lg text-white">Terbaru</button>
+                <form action="{{ route('quiz.index') }}">
+                    <input type="text" placeholder="Cari Kuis Disini..." name="q" value="{{ $query }}"
+                        class="flex-grow bg-gray-900 text-white px-4 py-2 rounded-lg border border-gray-700 focus:outline-none focus:ring focus:ring-blue-500" />
+                    <button class="bg-gray-700 px-4 py-2 rounded-lg text-white">Cari</button>
+                </form>
             </div>
 
             <!-- Grid Kartu Kuis -->
             <div class="grid grid-cols-4 gap-6">
                 @foreach ($quizes as $quiz)
-                @php
-                    $difficulty = 'Mudah';
+                    @php
+                        $difficulty = 'Mudah';
 
-                    if ($quiz->difficulty == 'medium') {
-                        $difficulty = 'Medium';
-                    } elseif ($quiz->difficulty == 'hard') {
-                        $difficulty = 'Sulit';
-                    }
-                @endphp
+                        if ($quiz->difficulty == 'medium') {
+                            $difficulty = 'Medium';
+                        } elseif ($quiz->difficulty == 'hard') {
+                            $difficulty = 'Sulit';
+                        }
+                    @endphp
                     <!-- Kartu Kuis -->
                     <div class="bg-yellow-400 text-gray-900 p-4 rounded-lg shadow-md">
                         <a href="{{ route('quiz.show', $quiz->id) }}">
@@ -49,7 +51,8 @@
                             <p class="text-sm text-gray-700 mb-4">
                                 {{ Carbon\Carbon::parse($quiz->created_at)->locale('id')->diffForHumans() }}</p>
                         </a>
-                        <a href="{{ route('quiz.join', $quiz->id) }}" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition inline-block text-center">Mulai
+                        <a href="{{ route('quiz.join', $quiz->id) }}"
+                            class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition inline-block text-center">Mulai
                             Langsung</a>
                     </div>
                     <!-- Salin kartu di atas untuk mengisi grid -->
