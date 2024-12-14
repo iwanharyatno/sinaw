@@ -13,9 +13,15 @@ use Illuminate\Support\Facades\Validator;
 class QuizController extends Controller
 {
     public function index(){
-        $quizes = Quiz::with('questions')->where('is_public', 'true')->orderBy('created_at', 'desc')->get();
+        $query = "";
 
-        return view('kuis.index', compact('quizes'));
+        if (request('q')) {
+            $query = request('q');
+        }
+
+        $quizes = Quiz::with('questions')->where('is_public', 'true')->where('quiz_name', 'ILIKE', "%$query%")->orderBy('created_at', 'desc')->get();
+
+        return view('kuis.index', compact('quizes', 'query'));
     }
 
     public function indexMine(){
