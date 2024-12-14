@@ -38,11 +38,12 @@ Route::controller(QuizController::class)->group(function () {
         Route::get('/kuis/join/{id}', 'join')->name('quiz.join');
         Route::post('/kuis/join/{id}', 'attempt')->name('quiz.attempt');
         Route::get('/kuis/play/{id}', 'play')->name('quiz.play');
+        
 
         Route::post('/kuis/change-visibility/{id}', 'changeVisibility')->name('quiz.change-visibility');
         Route::post('/kuis/join', 'joinUsingCode')->name('quiz.join-code');
     });
-
+   
     Route::get('/kuis/{id}', 'show')->name('quiz.show');
 });
 

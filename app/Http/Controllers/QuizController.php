@@ -29,7 +29,7 @@ class QuizController extends Controller
         $quiz = Quiz::with('questions')->find($id);
 
         if (!$quiz->is_public) {
-            abort(403);
+            return view ('kuis.close', compact('quiz'));
         }
 
         return view('kuis.show', compact('quiz'));
@@ -48,12 +48,15 @@ class QuizController extends Controller
         $quiz = Quiz::with('questions')->find($id);
 
         if (!$quiz->is_public) {
-            abort(403);
+            return view ('kuis.close', compact('quiz'));
         }
 
         return view('kuis.join', compact('quiz'));
     }
 
+    public function close(){
+        return view('kuis.close');
+    }
     public function joinUsingCode(Request $request) {
         $validator = Validator::make($request->all(), [
             'code' => 'required|numeric'
@@ -210,7 +213,7 @@ class QuizController extends Controller
         $quiz = Quiz::with('questions.answers')->find($id);
 
         if (!$quiz->is_public) {
-            abort(403);
+            return view ('kuis.close', compact('quiz'));
         }
 
         return view('kuis.play', compact('quiz'));
@@ -233,7 +236,7 @@ class QuizController extends Controller
         $quiz = Quiz::find($id);
 
         if (!$quiz->is_public) {
-            abort(403);
+            return view ('kuis.close', compact('quiz'));
         }
 
         $attempt = $quiz->attempts()->create([
