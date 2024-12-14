@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('quiz_name');
             $table->text('description')->nullable();
             $table->foreignId('created_by')->constrained('users')->onDelete('cascade');
-            $table->boolean('is_public')->default(false);
+            $table->boolean('is_public')->default(true);
             $table->enum('difficulty', ['easy', 'medium', 'hard']);
             $table->integer('duration_min')->default(1);
             $table->timestamps();

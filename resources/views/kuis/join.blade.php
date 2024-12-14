@@ -28,15 +28,16 @@
                     </div>
                 </div>
 
-            <!-- Quiz Info -->
-            <div class="mt-4 text-left">
-                <p class="text-lg font-bold text-white">{{ $quiz->quiz_name }}</p>
-                <p class="inline-block bg-pink-600 text-white text-sm font-bold px-3 py-1 rounded-full mt-2">
-                {{ $quiz->questions->count() }} Soal
-                </p>
-                <p class="text-xs mt-2 text-white">Pembuat: {{ $quiz->user->first_name . " " . $quiz->user->last_name }}</p>
+                <!-- Quiz Info -->
+                <div class="mt-4 text-left">
+                    <p class="text-lg font-bold text-white">{{ $quiz->quiz_name }}</p>
+                    <p class="inline-block bg-pink-600 text-white text-sm font-bold px-3 py-1 rounded-full mt-2">
+                        {{ $quiz->questions->count() }} Soal
+                    </p>
+                    <p class="text-xs mt-2 text-white">Pembuat: {{ $quiz->user->first_name . ' ' . $quiz->user->last_name }}
+                    </p>
+                </div>
             </div>
-        </div>
 
             <!-- Footer -->
             <p class="mt-6 italic text-white text-8xl" id="countDown">5</p>

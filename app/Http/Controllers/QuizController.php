@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Validator;
 class QuizController extends Controller
 {
     public function index(){
-        $quizes = Quiz::with('questions')->orderBy('created_at', 'desc')->get();
+        $quizes = Quiz::with('questions')->where('is_public', 'true')->orderBy('created_at', 'desc')->get();
 
         return view('kuis.index', compact('quizes'));
     }
@@ -27,6 +27,11 @@ class QuizController extends Controller
 
     public function show($id) {
         $quiz = Quiz::with('questions')->find($id);
+
+        if (!$quiz->is_public) {
+            abort(403);
+        }
+
         return view('kuis.show', compact('quiz'));
     }
 
@@ -41,8 +46,26 @@ class QuizController extends Controller
 
     public function join($id) {
         $quiz = Quiz::with('questions')->find($id);
+
+        if (!$quiz->is_public) {
+            abort(403);
+        }
+
         return view('kuis.join', compact('quiz'));
     }
+
+    public function joinUsingCode(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'code' => 'required|numeric'
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator->errors());
+        }
+
+        return redirect()->route('quiz.join', $request->code);
+    }
+
     public function store(Request $request) {
         $validator = Validator::make($request->all(), [
             'title' => 'required|string|max:255',
@@ -185,6 +208,11 @@ class QuizController extends Controller
 
     public function play($id) {
         $quiz = Quiz::with('questions.answers')->find($id);
+
+        if (!$quiz->is_public) {
+            abort(403);
+        }
+
         return view('kuis.play', compact('quiz'));
     }
 
@@ -203,6 +231,10 @@ class QuizController extends Controller
 
         $data = $validator->validated();
         $quiz = Quiz::find($id);
+
+        if (!$quiz->is_public) {
+            abort(403);
+        }
 
         $attempt = $quiz->attempts()->create([
             'user_id' => Auth::user()->id,
@@ -225,6 +257,15 @@ class QuizController extends Controller
         if ($quiz->header_path) Storage::disk('google')->delete($quiz->header_path);
 
         return back();
+    }
+
+    public function changeVisibility($id) {
+        $quiz = Quiz::find($id);
+        $quiz->is_public = request('is_public');
+
+        $quiz->save();
+
+        return redirect()->route('quiz.index-mine');
     }
     
 }
