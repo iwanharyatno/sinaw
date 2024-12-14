@@ -39,7 +39,7 @@ Route::controller(QuizController::class)->group(function () {
         Route::post('/kuis/join/{id}', 'attempt')->name('quiz.attempt');
         Route::get('/kuis/play/{id}', 'play')->name('quiz.play');
 
-        Route::get('/kuis/change-visibility/{id}', 'changeVisibility')->name('quiz.change-visibility');
+        Route::post('/kuis/change-visibility/{id}', 'changeVisibility')->name('quiz.change-visibility');
         Route::post('/kuis/join', 'joinUsingCode')->name('quiz.join-code');
     });
 

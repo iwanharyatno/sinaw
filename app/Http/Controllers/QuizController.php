@@ -259,7 +259,7 @@ class QuizController extends Controller
         return back();
     }
 
-    public function changeVisibility($id) {
+    public function changeVisibility(Request $request, $id) {
         $quiz = Quiz::find($id);
         $quiz->is_public = request('is_public');
 
