@@ -26,10 +26,12 @@ class NongkrongController extends Controller
 
     public function mine(){
         $user = User::find(Auth::user()->id);
-        $threads = $user->threads()->with('replies')->get();
-        return view('nongkrong.mine', compact('threads'));
+        $threads = $user->threads()->with('replies')->orderBy('created_at', 'desc')->paginate(5);
+        return view('nongkrong.mine', compact('threads','user'));
     }
 
+    
+    
     public function reply($threadId){
         $thread = ThreadDiscussion::with('replies.user')->find($threadId);
 

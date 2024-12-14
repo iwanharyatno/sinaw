@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <body class="bg-gray-800 font-poppin min-h-screen">
+    <body class="bg-gray-800 font-poppins min-h-screen">
         <!-- Navbar -->
         <nav class="bg-gray-900 p-4 flex text-white justify-between items-center h-16">
 
