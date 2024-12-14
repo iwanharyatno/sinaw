@@ -81,10 +81,10 @@ if ($quiz->difficulty == 'medium') {
                 <div class="w-1/3 pl-6">
                     <div class="bg-gray-600 p-4 rounded-lg mb-4">
                         <h4 class="text-lg mb-2">
-                            Link Undangan
+                            Kode Join
                         </h4>
-                        <button class="bg-gray-700 text-white px-4 py-2 rounded">
-                            Link Undangan
+                        <button class="bg-gray-700 text-white px-4 py-2 rounded" onclick="copyContent(this)">
+                            {{ $quiz->id }}
                         </button>
                     </div>
                     <div class="bg-gray-600 p-4 rounded-lg mb-4">
@@ -115,11 +115,24 @@ if ($quiz->difficulty == 'medium') {
                             </li>
                         </ul>
                     </div>
-                    <button class="bg-blue-600 text-white px-4 py-2 rounded w-full">
+                    <a href="{{ route('quiz.join', $quiz->id) }}" class="bg-blue-600 text-white px-4 py-2 rounded w-full">
                         Masuk Kuis
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 @endsection
+
+<script>
+    function copyContent(element) {
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(element.innerText).then(() => {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Kode berhasil disalin!'
+                })
+            })
+        }
+    }
+</script>

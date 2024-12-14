@@ -44,15 +44,16 @@
         @endauth
       </div>
       @auth
-        <img src="{{ $user->avatar ? $user->avatar : 'https://via.placeholder.com/64' }}" alt="Profile" class="w-16 h-16 rounded-full">
+        <img src="/image/{{ $user->avatar ? $user->avatar : '' }}" alt="Profile" class="w-16 h-16 rounded-full">
       @endauth
     </div>
 
     <!-- Join Code Input -->
-    <div class="flex items-center gap-2 mb-6 w-full max-w-lg">
-      <input type="text" placeholder="Enter a join code" class="flex-grow px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring focus:ring-blue-300">
-      <a href="" class="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700">Join</a>
-    </div>
+    <form method="POST" action="{{ route('quiz.join-code') }}" class="flex items-center gap-2 mb-6 w-full max-w-lg">
+      @csrf
+      <input type="number" placeholder="Enter a join code" class="flex-grow px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring focus:ring-blue-300" name="code">
+      <button class="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700">Join</button>
+    </form>
 
     <div class="flex items-center mb-8">
       <a href="{{ route('quiz.create') }}">
