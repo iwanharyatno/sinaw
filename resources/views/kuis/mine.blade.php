@@ -34,10 +34,14 @@
                             <p class="text-sm text-gray-700 mb-4">
                                 {{ Carbon\Carbon::parse($quiz->created_at)->locale('id')->diffForHumans() }}</p>
                         </a>
-                        <a href="{{ route('quiz.edit', $quiz->id) }}" class="inline-block w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition text-center mb-2">Edit</a>
+                        <a href="{{ route('quiz.edit', $quiz->id) }}" class="inline-block w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition text-center mb-2"><i class="fa fa-edit" style="font-size:24px"></i></a>
                         <form action="{{ route('quiz.delete', $quiz->id) }}" method="post" onsubmit="return confirm('Yakin ingin menghapus data ini?')">
                             @csrf
-                            <button class="w-full bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 transition">Hapus</button>
+                            <button class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-red-700 transition"><i class="fa fa-trash" style="font-size:24px"></i></button>
+                        </form>
+                        <form class="mt-3" action="" method="post" onsubmit="return confirm('Yakin ingin stop quiz ini?')">
+                            @csrf
+                            <button class="w-full bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 transition">Akhiri Kuis </button>
                         </form>
                     </div>
                     <!-- Salin kartu di atas untuk mengisi grid -->
