@@ -1,7 +1,5 @@
 @extends('layouts.base')
 
-
-
 @section('content')
 
     <body class="bg-gray-800 font-poppin min-h-screen">

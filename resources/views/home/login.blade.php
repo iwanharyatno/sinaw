@@ -66,8 +66,9 @@
     </div>
 
     <!-- Bagian Kanan -->
-    <div class="w-1/2 bg-white rounded-r-lg">
+    <div class="w-1/2 bg-blue-900 rounded-r-lg">
       <!-- Kosongkan untuk area putih sesuai gambar -->
+       <img src="{{ asset('/asset/login.jpg') }}" alt="">
     </div>
   </div>
 </div>
