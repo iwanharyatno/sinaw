@@ -5,9 +5,6 @@
 @section('Home_content')
 
     <body class="bg-gray-800 text-white min-h-screen">
-        <!-- Navbar -->
-
-
         <!-- Konten -->
         <div class="p-6">
             <!-- Header -->
@@ -30,9 +27,9 @@
                     <!-- Kartu Kuis -->
                     <div class="bg-yellow-400 text-gray-900 p-4 rounded-lg shadow-md">
                         <a href="{{ route('quiz.show', $quiz->id) }}">
-                            <img src="https://via.placeholder.com/150" alt="Thumbnail"
+                            <img src="/image/{{ $quiz->header_path }}" alt="Thumbnail"
                                 class="w-full h-24 object-cover rounded-lg mb-4" />
-                            <h3 class="text-lg font-bold">{{ $quiz->quiz_name }}</h3>
+                            <h3 class="text-lg font-bold">{{ $quiz->quiz_name }} (Code: {{ $quiz->id }})</h3>
                             <p class="text-sm text-gray-700">{{ $difficulty }} • {{ $quiz->questions->count() }} Soal</p>
                             <p class="text-sm text-gray-700 mb-4">
                                 {{ Carbon\Carbon::parse($quiz->created_at)->locale('id')->diffForHumans() }}</p>

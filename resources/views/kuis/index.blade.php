@@ -10,7 +10,7 @@
         <!-- Konten -->
         <div class="p-6">
             <!-- Header -->
-            <div class="flex justify-between items-center mb-4">
+            <div class="flex justify-between items-center mb-4 text-white">
                 <h2 class="text-xl font-semibold">Cari atau buat kuis</h2>
             </div>
 
@@ -42,8 +42,8 @@
                     <!-- Kartu Kuis -->
                     <div class="bg-yellow-400 text-gray-900 p-4 rounded-lg shadow-md">
                         <a href="{{ route('quiz.show', $quiz->id) }}">
-                            <img src="https://via.placeholder.com/150" alt="Thumbnail"
-                                class="w-full h-24 object-cover rounded-lg mb-4" />
+                            <img src="/image/{{ $quiz->header_path }}" alt="Thumbnail"
+                                class="w-full h-24 object-cover rounded-lg mb-4 bg-gray-200" />
                             <h3 class="text-lg font-bold">{{ $quiz->quiz_name }}</h3>
                             <p class="text-sm text-gray-700">{{ $difficulty }} • {{ $quiz->questions->count() }} Soal</p>
                             <p class="text-sm text-gray-700 mb-4">

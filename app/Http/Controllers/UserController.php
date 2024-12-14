@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
@@ -19,7 +20,7 @@ class UserController extends Controller
 
         $validator = Validator::make($request->all(), [
             'password' => 'confirmed:confirm_password',
-            'email' => 'unique:users,email,' . $user->id . ',id'
+            'email' => 'unique:users,email,' . $user->id . ',id',
         ]);
 
         if ($validator->fails()) {
@@ -30,6 +31,12 @@ class UserController extends Controller
         if ($request->last_name) $user->last_name = $request->last_name;
         if ($request->email) $user->email = $request->email;
         if ($request->password) $user->password = bcrypt($request->password);
+
+        if ($request->file('avatar')) {
+            $path = Storage::disk('google')->putFile('', $request->file('avatar'));
+            if ($user->avatar) Storage::disk('google')->delete($user->avatar);
+            $user->avatar = $path;
+        }
 
         $user->save();
 

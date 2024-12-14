@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class QuizController extends Controller
@@ -64,10 +65,17 @@ class QuizController extends Controller
 
         $user = User::find(Auth::user()->id);
 
+        $header_path = null;
+
+        if ($request->file('header_image')) {
+            $header_path = Storage::disk('google')->putFile('', $request->file('header_image'));
+        }
+
         $quiz = $user->quizzes()->create([
             'quiz_name' => $data['title'],
             'description' => $data['description'] ?? "",
-            'difficulty' => 'easy'
+            'difficulty' => 'easy',
+            'header_path' => $header_path
         ]);
     
         // Create Questions and Answers
@@ -115,10 +123,18 @@ class QuizController extends Controller
 
         $data = $validator->validated();
 
-        DB::transaction(function () use ($data, $quizId) {
+        DB::transaction(function () use ($data, $quizId, $request) {
             // Update the quiz title
             $quiz = Quiz::findOrFail($quizId);
             $quiz->update(['quiz_name' => $data['title']]);
+
+            if ($request->file('header_image')) {
+                if ($quiz->header_path) Storage::disk('google')->delete($quiz->header_path);
+
+                $header_path = Storage::disk('google')->putFile('', $request->file('header_image'));
+                $quiz->header_path = $header_path;
+                $quiz->save();
+            }
     
             // Keep track of updated IDs
             $updatedQuestionIds = [];
@@ -205,6 +221,8 @@ class QuizController extends Controller
     public function delete($id) {
         $quiz = Quiz::find($id);
         $quiz->delete();
+
+        if ($quiz->header_path) Storage::disk('google')->delete($quiz->header_path);
 
         return back();
     }

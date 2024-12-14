@@ -34,7 +34,7 @@
                 <p class="inline-block bg-pink-600 text-white text-sm font-bold px-3 py-1 rounded-full mt-2">
                 {{ $quiz->questions->count() }} Soal
                 </p>
-                <p class="text-xs mt-2 text-white">Pembuat: Iwan Haryanto</p>
+                <p class="text-xs mt-2 text-white">Pembuat: {{ $quiz->user->first_name . " " . $quiz->user->last_name }}</p>
             </div>
         </div>
 

@@ -9,7 +9,7 @@
     <h1 class="text-4xl font-bold text-white">Sina<span class="text-purple-400">W</span></h1>
     @auth
         <div class="relative rounded-full group p-2">
-            <img src="{{ $user->avatar ? $user->avatar : 'https://via.placeholder.com/64' }}" alt="Profile" class="w-10 h-10 rounded-full">
+            <img src="{{ $user->avatar ? "/image/" . $user->avatar : 'https://via.placeholder.com/64' }}" alt="Profile" class="w-10 h-10 rounded-full">
             <div class="absolute divide-y top-full right-0 w-44 bg-white rounded-md -mt-1 hidden group-hover:block">
                 <ul>
                     <li class="px-4 py-2 border-b-2"><strong>Account</strong></li>

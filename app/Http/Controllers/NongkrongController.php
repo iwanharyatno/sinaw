@@ -25,7 +25,9 @@ class NongkrongController extends Controller
     }
 
     public function mine(){
-        return view('nongkrong.mine');
+        $user = User::find(Auth::user()->id);
+        $threads = $user->threads()->with('replies')->get();
+        return view('nongkrong.mine', compact('threads'));
     }
 
     public function reply($threadId){
