@@ -8,8 +8,8 @@
         <!-- Konten -->
         <div class="p-6">
             <!-- Header -->
-            <div class="flex justify-between items-center mb-4 text-white">
-                <h2 class="text-xl font-semibold">Kuis Saya</h2>
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-semibold text-white">Kuis Saya</h2>
             </div>
 
             <!-- Grid Kartu Kuis -->
