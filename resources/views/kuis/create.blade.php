@@ -7,90 +7,68 @@
 @endpush
 
 @section('content')
-<div class="bg-gray-100 min-h-screen">
-    <div class="flex flex-col items-center justify-center max-w-4xl mx-auto pt-8 px-4">
-        <!-- Form AI -->
-        <div class="w-full bg-white p-6 rounded-lg shadow-md mb-6">
-            <h2 class="text-lg font-bold mb-4">Generate Pertanyaan dengan AI</h2>
-            <textarea 
-                class="w-full p-4 mb-4 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300" 
-                id="aiPrompt" 
-                placeholder="Masukkan deskripsi kuis atau ide soal untuk di-generate oleh AI"
-                rows="4"></textarea>
-            <button 
-                id="generateButton"
-                class="w-full px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600 disabled:bg-blue-200">
-                Generate
-            </button>
-        </div>
-
-        <!-- Form Quiz -->
-        <form 
-            class="w-full bg-white p-6 rounded-lg shadow-md" 
-            method="POST" 
-            action="{{ route('quiz.store') }}" 
-            id="quizForm">
-            @csrf
-            <div class="flex items-center mb-4">
-               
-                <h1 class="text-2xl font-bold ml-2">Buat Kuis Baru</h1>
-            </div>
-
-            <div class="mb-4">
-                <label for="title" class="block text-sm font-medium text-gray-700 mb-2">Judul Kuis</label>
-                <input 
-                    type="text" 
-                    id="title" 
-                    name="title" 
-                    placeholder="Tuliskan judul kuis" 
-                    class="w-full p-4 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300" 
-                    required>
-            </div>
-
-            <div 
-                class="w-full h-48 bg-gray-200 flex items-center justify-center mb-4 rounded-lg bg-contain bg-no-repeat bg-center cursor-pointer"
-                id="header_image">
-                <span class="text-gray-500">Ubah Cover</span>
-                <input type="file" name="header_image" id="header_image_file" style="display: none">
-            </div>
-
-            <div class="space-y-4" id="questions-wrapper">
-                <!-- Pertanyaan akan ditambahkan di sini -->
-            </div>
-
-            <button 
-                type="button" 
-                class="w-full p-4 mt-4 text-blue-500 border rounded-lg hover:bg-blue-50" 
-                onclick="addQuestion()">
-                + Tambah soal baru
-            </button>
-
-            <div>
-                <progress 
-                    class="w-full mt-4" 
-                    max="100" 
-                    value="0" 
-                    id="uploadProgress"
-                    style="display: none">
-                </progress>
-            </div>
-
-            <div class="flex justify-end mt-4 space-x-2">
-                <button 
-                    id="btnSimpan" 
-                    class="px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600 disabled:bg-blue-200"
-                    name="action">
-                    Simpan
+    <div class="bg-gray-100 min-h-screen">
+        <div class="flex flex-col items-center justify-center max-w-4xl mx-auto pt-8 px-4">
+            <!-- Form AI -->
+            <div class="w-full bg-white p-6 rounded-lg shadow-md mb-6">
+                <h2 class="text-lg font-bold mb-4">Generate Pertanyaan dengan AI</h2>
+                <textarea class="w-full p-4 mb-4 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300" id="aiPrompt"
+                    placeholder="Masukkan deskripsi kuis atau ide soal untuk di-generate oleh AI" rows="4"></textarea>
+                <button id="generateButton"
+                    class="w-full px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600 disabled:bg-blue-200">
+                    Generate
                 </button>
-                <a href="/kuis"
-                    id="btnBack" 
-                    class="px-4 py-2 text-white bg-red-500 rounded-lg hover:bg-blue-600 disabled:bg-blue-200">
-                    Kembali
-                </a>
             </div>
-        </form>
+
+            <!-- Form Quiz -->
+            <form class="w-full bg-white p-6 rounded-lg shadow-md" method="POST" action="{{ route('quiz.store') }}"
+                id="quizForm">
+                @csrf
+                <div class="flex items-center mb-4">
+
+                    <h1 class="text-2xl font-bold ml-2">Buat Kuis Baru</h1>
+                </div>
+
+                <div class="mb-4">
+                    <label for="title" class="block text-sm font-medium text-gray-700 mb-2">Judul Kuis</label>
+                    <input type="text" id="title" name="title" placeholder="Tuliskan judul kuis"
+                        class="w-full p-4 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300" required>
+                </div>
+
+                <div class="w-full h-48 bg-gray-200 flex items-center justify-center mb-4 rounded-lg bg-contain bg-no-repeat bg-center cursor-pointer"
+                    id="header_image">
+                    <span class="text-gray-500">Ubah Cover</span>
+                    <input type="file" name="header_image" id="header_image_file" style="display: none">
+                </div>
+
+                <div class="space-y-4" id="questions-wrapper">
+                    <!-- Pertanyaan akan ditambahkan di sini -->
+                </div>
+
+                <button type="button" class="w-full p-4 mt-4 text-blue-500 border rounded-lg hover:bg-blue-50"
+                    onclick="addQuestion()">
+                    + Tambah soal baru
+                </button>
+
+                <div>
+                    <progress class="w-full mt-4" max="100" value="0" id="uploadProgress" style="display: none">
+                    </progress>
+                </div>
+
+                <div class="flex justify-end mt-4 space-x-2">
+                    <button id="btnSimpan"
+                        class="px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600 disabled:bg-blue-200"
+                        name="action">
+                        Simpan
+                    </button>
+                    <a href="/kuis" id="btnBack"
+                        class="px-4 py-2 text-white bg-red-500 rounded-lg hover:bg-blue-600 disabled:bg-blue-200">
+                        Kembali
+                    </a>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
 @endsection
 
@@ -230,6 +208,12 @@
                     });
                 }
             };
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == XMLHttpRequest.DONE) {
+                    console.log(xhr.responseText);
+                }
+            }
 
             // Handle network errors
             xhr.onerror = function() {

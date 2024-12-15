@@ -104,40 +104,53 @@ class QuizController extends Controller
 
         $data = $validator->validated();
 
+        // Create Questions and Answers
         $user = User::find(Auth::user()->id);
 
-        DB::transaction(function () use ($user, $data, $request) {
-            $header_path = null;
+        $header_path = null;
 
-            if ($request->file('header_image')) {
-                $header_path = Storage::disk('google')->putFile('', $request->file('header_image'));
-            }
+        if ($request->file('header_image')) {
+            $header_path = Storage::disk('google')->putFile('', $request->file('header_image'));
+        }
 
-            $quiz = $user->quizzes()->create([
-                'quiz_name' => $data['title'],
-                'description' => $data['description'] ?? "",
-                'difficulty' => 'easy',
-                'header_path' => $header_path
-            ]);
+        $quizId = $user->quizzes()->insertGetId([
+            'quiz_name' => $data['title'],
+            'description' => $data['description'] ?? "",
+            'difficulty' => 'easy',
+            'header_path' => $header_path,
+            'created_by' => $user->id
+        ]);
 
-            // Create Questions and Answers
-            foreach ($data['questions'] as $questionData) {
-                $question = $quiz->questions()->create([
-                    'content' => $questionData['text'],
-                    'question_type' => $questionData['question_type']
-                ]);
-                foreach ($questionData['answers'] as $answerData) {
-                    $question->answers()->create([
-                        'content' => $answerData['text'],
-                        'is_correct' => $answerData['is_correct'] ?? 0,
-                    ]);
-                }
-            }
+        // Prepare questions for bulk insertion
+        $questions = collect($request->input('questions'))->map(function ($question) use ($quizId) {
+            return [
+                'quiz_id' => $quizId,
+                'content' => $question['text'],
+                'question_type' => $question['question_type']
+            ];
         });
 
-        return response()->json([
-            'success' => true
-        ]);
+        // Insert questions and get their IDs
+        DB::table('questions')->insert($questions->toArray());
+        $lastQuestionId = DB::getPdo()->lastInsertId();
+        $questionIds = collect(range($lastQuestionId - $questions->count(), $lastQuestionId));
+
+        // Prepare answers for bulk insertion
+        $answers = [];
+        foreach ($request->input('questions') as $index => $question) {
+            foreach ($question['answers'] as $answer) {
+                $answers[] = [
+                    'question_id' => $questionIds[$index],
+                    'content' => $answer['text'],
+                    'is_correct' => isset($answer['is_correct'])
+                ];
+            }
+        }
+
+        // Insert answers in bulk
+        DB::table('answers')->insert($answers);
+
+        return response()->json(['message' => 'Quiz created successfully.']);
     }
 
     public function update(Request $request, $quizId)
@@ -161,62 +174,69 @@ class QuizController extends Controller
         if ($validator->fails()) {
             return response()->json($validator->errors());
         }
+        // Update the quiz
+        DB::table('quizzes')
+            ->where('id', $quizId)
+            ->update([
+                'quiz_name' => $request->input('title'),
+                'description' => $request->input('description') ?? ''
+            ]);
 
-        $data = $validator->validated();
+        $existingQuestionIds = DB::table('questions')->where('quiz_id', $quizId)->pluck('id')->toArray();
+        $updatedQuestionIds = collect($request->input('questions'))->pluck('id')->filter()->toArray();
 
-        DB::transaction(function () use ($data, $quizId, $request) {
-            // Update the quiz title
-            $quiz = Quiz::findOrFail($quizId);
-            $quiz->update(['quiz_name' => $data['title']]);
+        // Delete removed questions
+        $questionsToDelete = array_diff($existingQuestionIds, $updatedQuestionIds);
+        DB::table('questions')->whereIn('id', $questionsToDelete)->delete();
 
-            if ($request->file('header_image')) {
-                if ($quiz->header_path) Storage::disk('google')->delete($quiz->header_path);
+        // Update or insert questions
+        foreach ($request->input('questions') as $question) {
+            if (isset($question['id'])) {
+                // Update existing question
+                DB::table('questions')
+                    ->where('id', $question['id'])
+                    ->update([
+                        'content' => $question['text'],
+                        'question_type' => $question['question_type']
+                    ]);
+            } else {
+                // Insert new question
+                $newQuestionId = DB::table('questions')->insertGetId([
+                    'quiz_id' => $quizId,
+                    'content' => $question['text'],
+                    'question_type' => $question['question_type']
+                ]);
 
-                $header_path = Storage::disk('google')->putFile('', $request->file('header_image'));
-                $quiz->header_path = $header_path;
-                $quiz->save();
+                $question['id'] = $newQuestionId; // Update local data for further processing
             }
 
-            // Keep track of updated IDs
-            $updatedQuestionIds = [];
-            $updatedAnswerIds = [];
+            // Process answers
+            $existingAnswerIds = DB::table('answers')->where('question_id', $question['id'])->pluck('id')->toArray();
+            $updatedAnswerIds = collect($question['answers'])->pluck('id')->filter()->toArray();
 
-            foreach ($data['questions'] as $questionData) {
-                // Update or create question
-                $question = $quiz->questions()->updateOrCreate(
-                    ['id' => $questionData['id'] ?? null],
-                    [
-                        'content' => $questionData['text'],
-                        'question_type' => $questionData['question_type'],
-                    ]
-                );
+            // Delete removed answers
+            $answersToDelete = array_diff($existingAnswerIds, $updatedAnswerIds);
+            DB::table('answers')->whereIn('id', $answersToDelete)->delete();
 
-                $updatedQuestionIds[] = $question->id;
-
-                foreach ($questionData['answers'] as $answerData) {
-                    // Update or create answer
-                    $answer = $question->answers()->updateOrCreate(
-                        ['id' => $answerData['id'] ?? null],
-                        [
-                            'content' => $answerData['text'],
-                            'is_correct' => $answerData['is_correct'] ?? false,
-                        ]
-                    );
-
-                    $updatedAnswerIds[] = $answer->id;
+            foreach ($question['answers'] as $answer) {
+                if (isset($answer['id'])) {
+                    // Update existing answer
+                    DB::table('answers')
+                        ->where('id', $answer['id'])
+                        ->update([
+                            'content' => $answer['text'],
+                            'is_correct' => isset($answer['is_correct'])
+                        ]);
+                } else {
+                    // Insert new answer
+                    DB::table('answers')->insert([
+                        'question_id' => $question['id'],
+                        'content' => $answer['text'],
+                        'is_correct' => isset($answer['is_correct'])
+                    ]);
                 }
-
-                // Delete removed answers
-                $question->answers()
-                    ->whereNotIn('id', $updatedAnswerIds)
-                    ->delete();
             }
-
-            // Delete removed questions
-            $quiz->questions()
-                ->whereNotIn('id', $updatedQuestionIds)
-                ->delete();
-        });
+        }
 
         return response()->json([
             'success' => true,

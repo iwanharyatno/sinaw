@@ -14,25 +14,29 @@ use Mockery\CountValidator\AtMost;
 
 class NongkrongController extends Controller
 {
-     public function index(){
+    public function index()
+    {
         $threads = ThreadDiscussion::with('user', 'replies')->orderBy('created_at', 'desc')->get();
 
         return view('nongkrong.index', compact('threads'));
     }
 
-    public function create(){
+    public function create()
+    {
         return view('nongkrong.create');
     }
 
-    public function mine(){
+    public function mine()
+    {
         $user = User::find(Auth::user()->id);
         $threads = $user->threads()->with('replies')->orderBy('created_at', 'desc')->paginate(5);
-        return view('nongkrong.mine', compact('threads','user'));
+        return view('nongkrong.mine', compact('threads', 'user'));
     }
 
-    
-    
-    public function reply($threadId){
+
+
+    public function reply($threadId)
+    {
         $thread = ThreadDiscussion::with('replies.user')->find($threadId);
 
         if (!$thread) {
@@ -42,7 +46,8 @@ class NongkrongController extends Controller
         return view('nongkrong.reply', compact('thread'));
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'title' => 'required',
             'content' => 'required',
@@ -52,27 +57,26 @@ class NongkrongController extends Controller
         if ($validator->fails()) {
             return back()->withErrors($validator->errors());
         }
-        
+
         $data = $validator->validated();
 
-        DB::transaction(function() use ($data) {
-            $user = User::find(Auth::user()->id);
+        $user = User::find(Auth::user()->id);
 
-            $threadDiscussion = $user->threads()->create([
-                'title' => $data['title'],
-                'category' => $data['category']
-            ]);
+        $threadDiscussion = $user->threads()->create([
+            'title' => $data['title'],
+            'category' => $data['category']
+        ]);
 
-            $threadDiscussion->replies()->create([
-                'content' => $data['content'],
-                'user_id' => $user->id,
-            ]);
-        });
+        $threadDiscussion->replies()->create([
+            'content' => $data['content'],
+            'user_id' => $user->id,
+        ]);
 
         return redirect()->route('nongkrong.index');
     }
 
-    public function storeReply(Request $request, $threadId) {
+    public function storeReply(Request $request, $threadId)
+    {
         $validator = Validator::make($request->all(), [
             'content' => 'required'
         ]);
