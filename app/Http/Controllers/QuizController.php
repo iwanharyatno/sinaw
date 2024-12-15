@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Quiz;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -118,7 +119,8 @@ class QuizController extends Controller
             'description' => $data['description'] ?? "",
             'difficulty' => 'easy',
             'header_path' => $header_path,
-            'created_by' => $user->id
+            'created_by' => $user->id,
+            'created_at' => Carbon::now()
         ]);
 
         // Prepare questions for bulk insertion
