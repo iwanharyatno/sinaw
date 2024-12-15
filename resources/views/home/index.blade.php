@@ -49,7 +49,7 @@
     </div>
 
     <!-- Join Code Input -->
-    <form method="POST" action="{{ route('quiz.join-code') }}" class="flex items-center gap-2 mb-6 w-full max-w-lg">
+    <form method="POST" action="{{ route('quiz.join-code') }}" class="flex flex-col md:flex-row md:items-center gap-2 mb-6 w-full max-w-lg">
       @csrf
       <input type="number" placeholder="Enter a join code" class="flex-grow px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring focus:ring-blue-300" name="code">
       <button class="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700">Join</button>

@@ -20,7 +20,7 @@
                 </select>
                 <button class="bg-gray-700 text-white px-4 py-2 rounded-lg">Reset</button>
                 <button class="bg-gray-700 text-white px-4 py-2 rounded-lg">Tambah Filter</button>
-                <form action="{{ route('quiz.index') }}" class="flex flex-grow items-center gap-4 w-full md:w-auto">
+                <form action="{{ route('quiz.index') }}" class="flex flex-col md:flex-row flex-grow md:items-center gap-4 w-full md:w-auto">
                     <input type="text" placeholder="Cari Kuis Disini..." name="q" value="{{ $query }}"
                         class="flex-grow bg-gray-900 text-white px-4 py-2 rounded-lg border border-gray-700 focus:outline-none focus:ring focus:ring-blue-500" />
                     <button class="bg-gray-700 px-4 py-2 rounded-lg text-white">Cari</button>

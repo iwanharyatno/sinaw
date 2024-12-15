@@ -4,8 +4,8 @@
 
 @section('content')
 <div class="bg-gray-800 flex items-center justify-center min-h-screen">
-    <div class="bg-gray-900 text-white rounded-lg shadow-lg p-8 w-full max-w-4xl flex flex-col md:flex-row">
-        <div class="w-full md:w-1/2">
+    <div class="bg-gray-900 text-white rounded-lg shadow-lg w-full max-w-4xl flex flex-col-reverse md:flex-row">
+        <div class="w-full md:w-1/2 p-8">
             <h1 class="text-3xl font-bold mb-2" style="font-family: 'Nunito', sans-serif;">Selamat Datang</h1>
             <p class="mb-6">Sudah Punya Akun? <a href="{{ route('home.login') }}" class="text-blue-400">Masuk</a></p>
     

@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="min-h-screen bg-gray-800 flex items-center justify-center">
-  <div class="bg-gray-900 rounded-lg shadow-lg flex flex-col md:flex-row w-full max-w-4xl">
+  <div class="bg-gray-900 rounded-lg shadow-lg flex flex-col-reverse md:flex-row w-full max-w-4xl">
     <!-- Bagian Kiri -->
     <div class="w-full md:w-1/2 p-8 text-white">
       <h1 class="text-3xl font-bold mb-2">SinaW</h1>
