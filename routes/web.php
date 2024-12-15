@@ -79,3 +79,6 @@ Route::get('/image/{path}', function($path) {
     $ext = explode('.', $path)[1];
     return response($img)->header('Content-type', 'image/' . $ext);
 });
+
+Route::get('oauth/google', [\App\Http\Controllers\OauthController::class, 'redirectToProvider'])->name('oauth.google');  
+Route::get('oauth/google/callback', [\App\Http\Controllers\OauthController::class, 'handleProviderCallback'])->name('oauth.google.callback');

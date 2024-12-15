@@ -59,9 +59,9 @@
       </div>
 
       <!-- Masuk dengan Google -->
-      <button class="w-full flex items-center justify-center gap-2 bg-white text-gray-800 py-2 rounded-lg hover:bg-gray-200">
+      <a href="{{ route('oauth.google') }}" class="w-full flex items-center justify-center gap-2 bg-white text-gray-800 py-2 rounded-lg hover:bg-gray-200">
       <i class="fab fa-google mr-2"></i> Masuk Menggunakan Google
-      </button>
+      </a>
     </div>
 
     <!-- Bagian Kanan -->

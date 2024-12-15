@@ -24,6 +24,7 @@
   </ul>
 
   <!-- Tombol Aksi -->
+  @auth
   <div class="hidden lg:flex items-center gap-4">
     <a href="{{ route('nongkrong.create') }}"
        class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition">
@@ -39,6 +40,7 @@
     alt="Profile" class="w-10 h-10 rounded-full">
     </div>
   </div>
+  @endauth
 </nav>
 
 <!-- Sidebar -->
@@ -95,7 +97,7 @@
       <div class="bg-white p-6 rounded-lg mb-6">
         <div class="flex items-center gap-4 mb-4">
           <div class=" rounded-full bg-red-500">
-          <img src="{{ auth()->user()->avatar ? '/image/' . auth()->user()->avatar : 'https://via.placeholder.com/64' }}"
+          <img src="{{ $thread->user->avatar ? '/image/' . $thread->user->avatar : 'https://via.placeholder.com/64' }}"
           alt="Profile" class="w-10 h-10 rounded-full">
           </div>
           <div>

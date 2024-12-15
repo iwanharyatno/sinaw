@@ -53,9 +53,9 @@
                     <span class="mx-2 text-gray-400">atau</span>
                     <hr class="flex-grow border-gray-600">
                 </div>
-                <button class="w-full bg-gray-800 p-2 rounded text-white border border-gray-600 flex items-center justify-center">
+                <a href="{{ route('oauth.google') }}" class="w-full bg-gray-800 p-2 rounded text-white border border-gray-600 flex items-center justify-center">
                     <i class="fab fa-google mr-2"></i> Masuk Menggunakan Google
-                </button>
+                </a>
             </form>
         </div>
         <div class="w-full md:w-1/2 bg-white rounded-lg">
