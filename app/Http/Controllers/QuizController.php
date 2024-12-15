@@ -12,7 +12,8 @@ use Illuminate\Support\Facades\Validator;
 
 class QuizController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $query = "";
 
         if (request('q')) {
@@ -24,46 +25,53 @@ class QuizController extends Controller
         return view('kuis.index', compact('quizes', 'query'));
     }
 
-    public function indexMine(){
+    public function indexMine()
+    {
         $user = User::find(Auth::user()->id);
         $quizes = $user->quizzes()->with('questions.answers')->orderBy('created_at', 'desc')->get();
 
         return view('kuis.mine', compact('quizes'));
     }
 
-    public function show($id) {
+    public function show($id)
+    {
         $quiz = Quiz::with('questions')->find($id);
 
         if (!$quiz->is_public) {
-            return view ('kuis.close', compact('quiz'));
+            return view('kuis.close', compact('quiz'));
         }
 
         return view('kuis.show', compact('quiz'));
     }
 
-    public function edit($id) {
+    public function edit($id)
+    {
         $quiz = Quiz::with('questions.answers')->find($id);
         return view('kuis.edit', compact('quiz'));
     }
 
-    public function create() {
+    public function create()
+    {
         return view('kuis.create');
     }
 
-    public function join($id) {
+    public function join($id)
+    {
         $quiz = Quiz::with('questions')->find($id);
 
         if (!$quiz->is_public) {
-            return view ('kuis.close', compact('quiz'));
+            return view('kuis.close', compact('quiz'));
         }
 
         return view('kuis.join', compact('quiz'));
     }
 
-    public function close(){
+    public function close()
+    {
         return view('kuis.close');
     }
-    public function joinUsingCode(Request $request) {
+    public function joinUsingCode(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'code' => 'required|numeric'
         ]);
@@ -75,7 +83,8 @@ class QuizController extends Controller
         return redirect()->route('quiz.join', $request->code);
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
@@ -97,20 +106,20 @@ class QuizController extends Controller
 
         $user = User::find(Auth::user()->id);
 
-        $header_path = null;
+        DB::transaction(function () use ($user, $data, $request) {
+            $header_path = null;
 
-        if ($request->file('header_image')) {
-            $header_path = Storage::disk('google')->putFile('', $request->file('header_image'));
-        }
+            if ($request->file('header_image')) {
+                $header_path = Storage::disk('google')->putFile('', $request->file('header_image'));
+            }
 
-        DB::transaction(function () use ($user, $data, $header_path) {
             $quiz = $user->quizzes()->create([
                 'quiz_name' => $data['title'],
                 'description' => $data['description'] ?? "",
                 'difficulty' => 'easy',
                 'header_path' => $header_path
             ]);
-        
+
             // Create Questions and Answers
             foreach ($data['questions'] as $questionData) {
                 $question = $quiz->questions()->create([
@@ -127,13 +136,12 @@ class QuizController extends Controller
         });
 
         return response()->json([
-            'success' => true 
+            'success' => true
         ]);
-
-        
     }
 
-    public function update(Request $request, $quizId) {
+    public function update(Request $request, $quizId)
+    {
         $validator = Validator::make($request->all(), [
             'title' => 'required|string|max:255',
             'questions' => 'array',
@@ -168,11 +176,11 @@ class QuizController extends Controller
                 $quiz->header_path = $header_path;
                 $quiz->save();
             }
-    
+
             // Keep track of updated IDs
             $updatedQuestionIds = [];
             $updatedAnswerIds = [];
-    
+
             foreach ($data['questions'] as $questionData) {
                 // Update or create question
                 $question = $quiz->questions()->updateOrCreate(
@@ -182,9 +190,9 @@ class QuizController extends Controller
                         'question_type' => $questionData['question_type'],
                     ]
                 );
-    
+
                 $updatedQuestionIds[] = $question->id;
-    
+
                 foreach ($questionData['answers'] as $answerData) {
                     // Update or create answer
                     $answer = $question->answers()->updateOrCreate(
@@ -194,16 +202,16 @@ class QuizController extends Controller
                             'is_correct' => $answerData['is_correct'] ?? false,
                         ]
                     );
-    
+
                     $updatedAnswerIds[] = $answer->id;
                 }
-    
+
                 // Delete removed answers
                 $question->answers()
                     ->whereNotIn('id', $updatedAnswerIds)
                     ->delete();
             }
-    
+
             // Delete removed questions
             $quiz->questions()
                 ->whereNotIn('id', $updatedQuestionIds)
@@ -216,17 +224,19 @@ class QuizController extends Controller
         ]);
     }
 
-    public function play($id) {
+    public function play($id)
+    {
         $quiz = Quiz::with('questions.answers')->find($id);
 
         if (!$quiz->is_public) {
-            return view ('kuis.close', compact('quiz'));
+            return view('kuis.close', compact('quiz'));
         }
 
         return view('kuis.play', compact('quiz'));
     }
 
-    public function attempt(Request $request, $id) {
+    public function attempt(Request $request, $id)
+    {
         $validator = Validator::make($request->all(), [
             'score' => 'required|numeric',
             'points' => 'required|numeric'
@@ -243,7 +253,7 @@ class QuizController extends Controller
         $quiz = Quiz::find($id);
 
         if (!$quiz->is_public) {
-            return view ('kuis.close', compact('quiz'));
+            return view('kuis.close', compact('quiz'));
         }
 
         $attempt = $quiz->attempts()->create([
@@ -260,7 +270,8 @@ class QuizController extends Controller
         ]);
     }
 
-    public function delete($id) {
+    public function delete($id)
+    {
         $quiz = Quiz::find($id);
         $quiz->delete();
 
@@ -269,7 +280,8 @@ class QuizController extends Controller
         return back();
     }
 
-    public function changeVisibility(Request $request, $id) {
+    public function changeVisibility(Request $request, $id)
+    {
         $quiz = Quiz::find($id);
         $quiz->is_public = request('is_public');
 
@@ -277,5 +289,4 @@ class QuizController extends Controller
 
         return redirect()->route('quiz.index-mine');
     }
-    
 }
