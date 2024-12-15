@@ -34,8 +34,8 @@ if ($quiz->difficulty == 'medium') {
                     <h2 class="text-xl">{{ $quiz->quiz_name }}</h2>
                 </div>
                 <div class="bg-yellow-400 p-4 rounded-lg mb-4">
-                    <img alt="Illustration of books and a lightbulb" class="w-full h-40 object-cover rounded-lg"
-                        src="https://storage.googleapis.com/a1aa/image/YGz1oJIwcgL2GRXkfb3KTUgChwV6RfZbdHxz62rhEANzPJ1TA.jpg" />
+                    <img alt="" class="w-full h-40 object-cover rounded-lg"
+                        src="{{ asset('image/' . $quiz->header_path) }}" />
                 </div>
                 <h3 class="text-2xl mb-2">{{ $quiz->quiz_name }}</h3>
                 <div class="flex items-center mb-2">

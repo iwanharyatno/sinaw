@@ -26,6 +26,11 @@
                     </div>
                 </div>
             @endforeach
+            <div class="mt-8 w-full">
+                <a href="{{ route('quiz.show', $quiz->id) }}"
+                    class="w-full bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 transition inline-block text-center mt-8">
+                    Berhenti Bermain</a>
+            </div>
         </div>
 
         <div class="text-center text-white hidden opacity-0" style="animation-fill-mode: forwards" id="screenDone">
@@ -41,7 +46,8 @@
             <p>Nilai: <span id="nilaiAkhir">0</span></p>
             <p>Poin: <span id="poinAkhir">0</span></p>
             <a href="{{ route('quiz.index') }}"
-                class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition inline-block text-center mt-8">Ke Daftar Kuis</a>
+                class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition inline-block text-center mt-8">Ke
+                Daftar Kuis</a>
         </div>
     </div>
 @endsection
