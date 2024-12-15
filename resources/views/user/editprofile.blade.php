@@ -47,7 +47,7 @@
         </div>
         <div class="mb-4 flex-1">
             <label for="avatar" class="block text-sm font-medium text-gray-700 mb-2">Profile Picture</label>
-            <img src="/image/{{ $user->avatar }}" alt="" style="width: 4rem; height: 4rem" class="rounded-full bg-gray-200" id="avatarPreview">
+            <img src="{{ asset('image/' . $user->avatar) }}" alt="" style="width: 4rem; height: 4rem" class="rounded-full bg-gray-200" id="avatarPreview">
             <input
                 type="file"
                 name="avatar"
