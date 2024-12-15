@@ -7,7 +7,7 @@
 @endpush
 
 @section('content')
-<div class="bg-gray-100 min-h-screen">
+<div class="bg-gray-800 min-h-screen">
     <div class="flex flex-col items-center justify-center max-w-4xl mx-auto pt-8 px-4">
         <!-- Form AI -->
         <div class="w-full bg-white p-6 rounded-lg shadow-md mb-6">
@@ -19,7 +19,7 @@
                 rows="4"></textarea>
             <button 
                 id="generateButton"
-                class="w-full px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600 disabled:bg-blue-200">
+                class="w-full px-4 py-2 text-white bg-purple-700 rounded-lg hover:bg-green-700 disabled:bg-blue-200">
                 Generate
             </button>
         </div>
@@ -78,13 +78,13 @@
             <div class="flex justify-end mt-4 space-x-2">
                 <button 
                     id="btnSimpan" 
-                    class="px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600 disabled:bg-blue-200"
+                    class="px-4 py-2 text-white bg-green-500 rounded-lg hover:bg-green-600 disabled:bg-blue-200"
                     name="action">
                     Simpan
                 </button>
                 <a href="/kuis"
                     id="btnBack" 
-                    class="px-4 py-2 text-white bg-red-500 rounded-lg hover:bg-blue-600 disabled:bg-blue-200">
+                    class="px-4 py-2 text-white bg-red-500 rounded-lg hover:bg-red-600 disabled:bg-blue-200">
                     Kembali
                 </a>
             </div>

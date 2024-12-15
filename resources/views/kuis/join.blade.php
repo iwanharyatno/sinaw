@@ -5,14 +5,14 @@
 @section('Home_content')
 
     <div
-        class="flex items-center justify-center min-h-screen bg-gradient-to-r from-purple-500 via-blue-800 to-blue-950 px-4">
+        class="flex items-center justify-center min-h-screen bg-gradient-to-r from-gray-700 via-gray-700 to-gray-800 px-4">
         <div class="text-center w-full max-w-lg">
             <!-- Header -->
             <h1 class="text-3xl md:text-4xl font-bold text-white mb-6">SinaW</h1>
 
             <!-- Card -->
             <div
-                class="bg-white bg-opacity-20 backdrop-blur-lg rounded-xl p-6 shadow-lg w-full h-auto md:w-[500px] md:h-[200px]">
+                class="bg-purple-700  backdrop-blur-lg rounded-xl p-6 shadow-lg w-full h-auto md:w-[500px] md:h-[200px]">
                 <div class="flex flex-wrap md:flex-nowrap justify-between items-center gap-4">
                     <!-- Profil -->
                     <div class="text-left w-full md:w-auto">
@@ -25,8 +25,8 @@
                     </div>
                     <!-- Avatar -->
                     <div>
-                        <img src="https://via.placeholder.com/60x60.png?text=🐴" alt="Avatar"
-                            class="w-14 h-14 rounded-full">
+                    <img src="{{ auth()->user()->avatar ? '/image/' . auth()->user()->avatar : 'https://via.placeholder.com/64' }}"
+                    alt="Profile" class="w-10 h-10 rounded-full">
                     </div>
                 </div>
 

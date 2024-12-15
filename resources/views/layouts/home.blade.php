@@ -28,7 +28,7 @@
                         + Buat Kuis
                     </a>
                     <a href="{{ route('quiz.index-mine') }}"
-                        class="bg-transparent text-green-500 px-4 py-2 rounded-lg hover:bg-green-500 hover:text-white transition">
+                        class="bg-purple-700 text-white  px-4 py-2 rounded-lg hover:bg-green-500 hover:text-white transition">
                         Kuis Saya
                     </a>
                     <div class="relative rounded-full group p-2 text-black">
