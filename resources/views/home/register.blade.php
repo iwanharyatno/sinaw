@@ -58,7 +58,9 @@
                 </button>
             </form>
         </div>
-        <div class="w-full md:w-1/2 bg-white rounded-lg"></div>
+        <div class="w-full md:w-1/2 bg-white rounded-lg">
+            <img src="{{ asset('/asset/login-image.jpg') }}" alt="" class="w-full h-full object-cover rounded-b-lg md:rounded-r-lg">
+        </div>
     </div>
 </div>
 @endsection

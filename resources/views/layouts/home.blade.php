@@ -7,7 +7,8 @@
         <nav class="bg-gray-900 p-4 flex text-white justify-between items-center h-16 relative">
             <!-- Logo -->
             <div class="flex items-center gap-4">
-                <h1 class="text-2xl font-bold text-white">Sina<span class="text-purple-400">W</span></h1>
+                <img src="{{ asset('asset/sinaw-logo.png') }}" alt="SinaW Logo" class="h-10">
+
             </div>
 
             <!-- Menu -->

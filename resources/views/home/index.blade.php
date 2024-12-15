@@ -6,7 +6,7 @@
 <div class="font-poppins bg-gradient-to-b from-gray-800 to-gray-700 min-h-screen flex flex-col">
   <!-- Header -->
   <div class="flex items-center justify-between px-6 py-4">
-    <h1 class="text-4xl font-bold text-white">Sina<span class="text-purple-400">W</span></h1>
+    <img src="{{ asset('asset/sinaw-logo.png') }}" alt="SinaW Logo" class="h-10">
     @auth
         <div class="relative rounded-full group p-2">
             <img src="{{ asset($user->avatar ? "image/" . $user->avatar : 'https://via.placeholder.com/64') }}" alt="Profile" class="w-10 h-10 rounded-full">

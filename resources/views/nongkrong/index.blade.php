@@ -6,7 +6,7 @@
 
 <nav class="bg-gray-900 p-4 flex justify-between items-center text-white font-poppins">
   <!-- Logo -->
-  <h1 class="text-2xl font-bold text-white">Sina<span class="text-purple-400">W</span></h1>
+  <img src="{{ asset('asset/sinaw-logo.png') }}" alt="SinaW Logo" class="h-10">
 
   <!-- Tombol Menu untuk Mobile -->
   <button id="menu-toggle" class="text-white focus:outline-none lg:hidden">

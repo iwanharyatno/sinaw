@@ -66,7 +66,7 @@
 
     <!-- Bagian Kanan -->
     <div class="w-full md:w-1/2 bg-blue-900 rounded-b-lg md:rounded-r-lg">
-      <img src="{{ asset('/asset/login.jpg') }}" alt="" class="w-full h-full object-cover rounded-b-lg md:rounded-r-lg">
+      <img src="{{ asset('/asset/login-image.jpg') }}" alt="" class="w-full h-full object-cover rounded-b-lg md:rounded-r-lg">
     </div>
   </div>
 </div>
