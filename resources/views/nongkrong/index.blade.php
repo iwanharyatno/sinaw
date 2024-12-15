@@ -33,8 +33,10 @@
        class="bg-transparent text-green-500 px-4 py-2 rounded-lg hover:bg-green-500 hover:text-white transition">
       Tulisan Saya
     </a>
+    
     <div class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center">
-      <span class="text-white font-bold">{{ auth()->user()->first_name[0] }}</span>
+    <img src="{{ auth()->user()->avatar ? '/image/' . auth()->user()->avatar : 'https://via.placeholder.com/64' }}"
+    alt="Profile" class="w-10 h-10 rounded-full">
     </div>
   </div>
 </nav>
@@ -50,7 +52,7 @@
     </button>
 
     <!-- Menu Sidebar -->
-    <ul class="space-y-4">
+    <ul class="p-4">
       <li><a href="{{ route('home.index') }}" class="block py-2 px-4 hover:bg-gray-700 rounded-md">Beranda</a></li>
       <li><a href="{{ route('aktivitas.index') }}" class="block py-2 px-4 hover:bg-gray-700 rounded-md">Aktivitas Saya</a></li>
       <li><a href="{{ route('nongkrong.index') }}" class="block py-2 px-4 hover:bg-gray-700 rounded-md">Nongkrong</a></li>
@@ -62,14 +64,21 @@
       + Tuliskan
     </a>
     <a href="{{ route('nongkrong.mine') }}"
-       class="block bg-transparent text-center text-green-500 px-4 py-2 rounded-lg hover:bg-green-500 hover:text-white transition">
+       class="block bg-transparent text-center text-white px-4 py-2 rounded-lg hover:bg-green-500  transition">
       Tulisan Saya
     </a>
+    <form method="POST" action="{{ route('home.logout') }}">
+      @csrf
+        <button
+          class="block w-full bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 mt-4">
+          Logout
+        </button>
+      </form>
   </div>
 </div>
 
 
-<div class="bg-blue-950 min-h-screen">
+<div class="bg-gray-800 min-h-screen">
   <!-- Main Content -->
   <div class="p-8 grid gap-8 container mx-auto md:grid-cols-3">
     <!-- Left Column -->
@@ -85,7 +94,10 @@
       @foreach ($threads as $thread)
       <div class="bg-white p-6 rounded-lg mb-6">
         <div class="flex items-center gap-4 mb-4">
-          <div class="w-12 h-12 rounded-full bg-red-500"></div>
+          <div class=" rounded-full bg-red-500">
+          <img src="{{ auth()->user()->avatar ? '/image/' . auth()->user()->avatar : 'https://via.placeholder.com/64' }}"
+          alt="Profile" class="w-10 h-10 rounded-full">
+          </div>
           <div>
             <h3 class="font-bold text-black">{{ $thread->user->first_name . ' ' . $thread->user->last_name }}</h3>
             <p class="text-black text-sm">{{ Carbon\Carbon::parse($thread->created_at)->format('d M Y') }}</p>

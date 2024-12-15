@@ -40,17 +40,17 @@
                         }
                     @endphp
                     <!-- Kartu Kuis -->
-                    <div class="bg-yellow-400 text-gray-900 p-4 rounded-lg shadow-md">
+                    <div class="bg-gray-900 text-white p-4 rounded-lg shadow-md">
                         <a href="{{ route('quiz.show', $quiz->id) }}">
                             <img src="/image/{{ $quiz->header_path }}" alt="Thumbnail"
                                 class="w-full h-24 object-cover rounded-lg mb-4 bg-gray-200" />
                             <h3 class="text-lg font-bold">{{ $quiz->quiz_name }}</h3>
-                            <p class="text-sm text-gray-700">{{ $difficulty }} • {{ $quiz->questions->count() }} Soal</p>
-                            <p class="text-sm text-gray-700 mb-4">
+                            <p class="text-sm text-white">{{ $difficulty }} • {{ $quiz->questions->count() }} Soal</p>
+                            <p class="text-sm text-white mb-4">
                                 {{ Carbon\Carbon::parse($quiz->created_at)->locale('id')->diffForHumans() }}</p>
                         </a>
                         <a href="{{ route('quiz.join', $quiz->id) }}"
-                            class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition inline-block text-center">Mulai
+                            class="w-full bg-purple-700 text-white py-2 rounded-lg hover:bg-green-500 transition inline-block text-center">Mulai
                             Langsung</a>
                     </div>
                 @endforeach

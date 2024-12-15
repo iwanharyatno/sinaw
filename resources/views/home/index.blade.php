@@ -3,7 +3,7 @@
 @section('title', 'Home | SINAW')
 
 @section('content')
-<div class="font-poppins bg-gradient-to-b from-gray-800 to-blue-900 min-h-screen flex flex-col">
+<div class="font-poppins bg-gradient-to-b from-gray-800 to-gray-700 min-h-screen flex flex-col">
   <!-- Header -->
   <div class="flex items-center justify-between px-6 py-4">
     <h1 class="text-4xl font-bold text-white">Sina<span class="text-purple-400">W</span></h1>

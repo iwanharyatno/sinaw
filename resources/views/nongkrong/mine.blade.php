@@ -33,7 +33,8 @@
       Tulisan Saya
     </a>
     <div class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center">
-      <span class="text-white font-bold">{{ auth()->user()->first_name[0] }}</span>
+    <img src="{{ auth()->user()->avatar ? '/image/' . auth()->user()->avatar : 'https://via.placeholder.com/64' }}"
+    alt="Profile" class="w-10 h-10 rounded-full">
     </div>
   </div>
 </nav>
@@ -49,7 +50,7 @@
     </button>
 
     <!-- Menu Sidebar -->
-    <ul class="space-y-4">
+    <ul class="p-4">
       <li><a href="{{ route('home.index') }}" class="block py-2 px-4 hover:bg-gray-700 rounded-md">Beranda</a></li>
       <li><a href="{{ route('aktivitas.index') }}" class="block py-2 px-4 hover:bg-gray-700 rounded-md">Aktivitas Saya</a></li>
       <li><a href="{{ route('nongkrong.index') }}" class="block py-2 px-4 hover:bg-gray-700 rounded-md">Nongkrong</a></li>
@@ -64,6 +65,13 @@
        class="block bg-transparent text-center text-green-500 px-4 py-2 rounded-lg hover:bg-green-500 hover:text-white transition">
       Tulisan Saya
     </a>
+    <form method="POST" action="{{ route('home.logout') }}">
+      @csrf
+        <button
+          class="block w-full bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 mt-4">
+          Logout
+        </button>
+      </form>
   </div>
 </div>
 
