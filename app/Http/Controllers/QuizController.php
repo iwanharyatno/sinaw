@@ -103,30 +103,31 @@ class QuizController extends Controller
             $header_path = Storage::disk('google')->putFile('', $request->file('header_image'));
         }
 
-        $quiz = $user->quizzes()->create([
-            'quiz_name' => $data['title'],
-            'description' => $data['description'] ?? "",
-            'difficulty' => 'easy',
-            'header_path' => $header_path
-        ]);
-    
-        // Create Questions and Answers
-        foreach ($data['questions'] as $questionData) {
-            $question = $quiz->questions()->create([
-                'content' => $questionData['text'],
-                'question_type' => $questionData['question_type']
+        DB::transaction(function () use ($user, $data, $header_path) {
+            $quiz = $user->quizzes()->create([
+                'quiz_name' => $data['title'],
+                'description' => $data['description'] ?? "",
+                'difficulty' => 'easy',
+                'header_path' => $header_path
             ]);
-            foreach ($questionData['answers'] as $answerData) {
-                $question->answers()->create([
-                    'content' => $answerData['text'],
-                    'is_correct' => $answerData['is_correct'] ?? 0,
+        
+            // Create Questions and Answers
+            foreach ($data['questions'] as $questionData) {
+                $question = $quiz->questions()->create([
+                    'content' => $questionData['text'],
+                    'question_type' => $questionData['question_type']
                 ]);
+                foreach ($questionData['answers'] as $answerData) {
+                    $question->answers()->create([
+                        'content' => $answerData['text'],
+                        'is_correct' => $answerData['is_correct'] ?? 0,
+                    ]);
+                }
             }
-        }
+        });
 
         return response()->json([
-            'success' => true,
-            'data' => $quiz 
+            'success' => true 
         ]);
 
         

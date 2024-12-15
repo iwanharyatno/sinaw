@@ -44,7 +44,7 @@
         @endauth
       </div>
       @auth
-        <img src="{{ asset($user->avatar ? 'image/' $user->avatar : '') }}" alt="Profile" class="w-16 h-16 rounded-full">
+        <img src="{{ asset($user->avatar ? 'image/' . $user->avatar : '') }}" alt="Profile" class="w-16 h-16 rounded-full">
       @endauth
     </div>
 
