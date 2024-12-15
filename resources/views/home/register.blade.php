@@ -4,21 +4,21 @@
 
 @section('content')
 <div class="bg-gray-800 flex items-center justify-center min-h-screen">
-    <div class="bg-gray-900 text-white rounded-lg shadow-lg p-8 w-8/12 flex gap-8">
-        <div class="w-8/12">
+    <div class="bg-gray-900 text-white rounded-lg shadow-lg p-8 w-full max-w-4xl flex flex-col md:flex-row">
+        <div class="w-full md:w-1/2">
             <h1 class="text-3xl font-bold mb-2" style="font-family: 'Nunito', sans-serif;">Selamat Datang</h1>
             <p class="mb-6">Sudah Punya Akun? <a href="{{ route('home.login') }}" class="text-blue-400">Masuk</a></p>
     
             <form method="POST" action="{{ route('home.handle-register') }}">
                 @csrf
-                <div class="flex space-x-4 mb-4">
-                    <div class="w-1/2">
+                <div class="flex flex-col md:flex-row md:space-x-4 mb-4">
+                    <div class="w-full md:w-1/2 mb-4 md:mb-0">
                         <input value="{{ old('first_name') }}" type="text" placeholder="Nama Depan*" class="w-full p-2 rounded bg-gray-700 text-white" name="first_name">
                         @error('first_name')
                             <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
                     </div>
-                    <div class="w-1/2">
+                    <div class="w-full md:w-1/2">
                         <input value="{{ old('last_name') }}" type="text" placeholder="Nama Belakang" class="w-full p-2 rounded bg-gray-700 text-white" name="last_name">
                         @error('last_name')
                             <span class="text-red-500 text-sm">{{ $message }}</span>
@@ -58,7 +58,7 @@
                 </button>
             </form>
         </div>
-        <div class="w-1/2 bg-white rounded-lg"></div>
+        <div class="w-full md:w-1/2 bg-white rounded-lg"></div>
     </div>
 </div>
 @endsection

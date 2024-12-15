@@ -4,16 +4,18 @@
 
 @section('Home_content')
 
-    <div class="flex items-center justify-center min-h-screen bg-gradient-to-r from-purple-500 via-blue-800-500 to-blue-950">
-        <div class="text-center ">
+    <div
+        class="flex items-center justify-center min-h-screen bg-gradient-to-r from-purple-500 via-blue-800 to-blue-950 px-4">
+        <div class="text-center w-full max-w-lg">
             <!-- Header -->
-            <h1 class="text-4xl font-bold text-white mb-6">SinaW</h1>
+            <h1 class="text-3xl md:text-4xl font-bold text-white mb-6">SinaW</h1>
 
             <!-- Card -->
-            <div class="bg-white bg-opacity-20 backdrop-blur-lg rounded-xl p-6 shadow-lg w-[500px] h-[200px]">
-                <div class="flex justify-between items-center">
+            <div
+                class="bg-white bg-opacity-20 backdrop-blur-lg rounded-xl p-6 shadow-lg w-full h-auto md:w-[500px] md:h-[200px]">
+                <div class="flex flex-wrap md:flex-nowrap justify-between items-center gap-4">
                     <!-- Profil -->
-                    <div class="text-left">
+                    <div class="text-left w-full md:w-auto">
                         <p class="text-lg font-semibold text-white">
                             {{ auth()->user()->first_name . ' ' . auth()->user()->last_name }}</p>
                         <p class="flex items-center text-sm text-white">
@@ -40,7 +42,7 @@
             </div>
 
             <!-- Footer -->
-            <p class="mt-6 italic text-white text-8xl" id="countDown">5</p>
+            <p class="mt-6 italic text-white text-6xl md:text-8xl" id="countDown">5</p>
         </div>
     </div>
 @endsection

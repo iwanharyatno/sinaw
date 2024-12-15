@@ -4,9 +4,7 @@
 
 @section('Home_content')
 
-    <body class="bg-gray-800 text-white min-h-screen">
-        <!-- Navbar -->
-
+   
         <!-- Konten -->
         <div class="p-6 text-white">
             <!-- Header -->
@@ -15,14 +13,14 @@
             </div>
 
             <!-- Filter dan Pencarian -->
-            <div class="flex items-center gap-4 mb-6">
+            <div class="flex flex-wrap items-center gap-4 mb-6">
                 <select
                     class="bg-gray-900 text-white px-4 py-2 rounded-lg border border-gray-700 focus:ring focus:ring-blue-500">
                     <option>Total Pertanyaan 5 atau lebih</option>
                 </select>
                 <button class="bg-gray-700 text-white px-4 py-2 rounded-lg">Reset</button>
                 <button class="bg-gray-700 text-white px-4 py-2 rounded-lg">Tambah Filter</button>
-                <form action="{{ route('quiz.index') }}">
+                <form action="{{ route('quiz.index') }}" class="flex flex-grow items-center gap-4 w-full md:w-auto">
                     <input type="text" placeholder="Cari Kuis Disini..." name="q" value="{{ $query }}"
                         class="flex-grow bg-gray-900 text-white px-4 py-2 rounded-lg border border-gray-700 focus:outline-none focus:ring focus:ring-blue-500" />
                     <button class="bg-gray-700 px-4 py-2 rounded-lg text-white">Cari</button>
@@ -30,7 +28,7 @@
             </div>
 
             <!-- Grid Kartu Kuis -->
-            <div class="grid grid-cols-4 gap-6">
+            <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 @foreach ($quizes as $quiz)
                     @php
                         $difficulty = 'Mudah';
@@ -55,7 +53,6 @@
                             class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition inline-block text-center">Mulai
                             Langsung</a>
                     </div>
-                    <!-- Salin kartu di atas untuk mengisi grid -->
                 @endforeach
             </div>
         </div>

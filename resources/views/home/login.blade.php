@@ -2,12 +2,11 @@
 
 @section('title', 'Login | SINAW')
 
-
 @section('content')
 <div class="min-h-screen bg-gray-800 flex items-center justify-center">
-  <div class="bg-gray-900 rounded-lg shadow-lg flex w-full max-w-4xl">
+  <div class="bg-gray-900 rounded-lg shadow-lg flex flex-col md:flex-row w-full max-w-4xl">
     <!-- Bagian Kiri -->
-    <div class="w-1/2 p-8 text-white">
+    <div class="w-full md:w-1/2 p-8 text-white">
       <h1 class="text-3xl font-bold mb-2">SinaW</h1>
       <p class="text-sm mb-6">Belum Punya Akun? <a href="{{ route('home.register') }}" class="text-blue-400 underline">Buat Akun</a></p>
       @error('general')
@@ -66,11 +65,9 @@
     </div>
 
     <!-- Bagian Kanan -->
-    <div class="w-1/2 bg-blue-900 rounded-r-lg">
-      <!-- Kosongkan untuk area putih sesuai gambar -->
-       <img src="{{ asset('/asset/login.jpg') }}" alt="">
+    <div class="w-full md:w-1/2 bg-blue-900 rounded-b-lg md:rounded-r-lg">
+      <img src="{{ asset('/asset/login.jpg') }}" alt="" class="w-full h-full object-cover rounded-b-lg md:rounded-r-lg">
     </div>
   </div>
 </div>
-
 @endsection
