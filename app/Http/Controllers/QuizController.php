@@ -36,6 +36,7 @@ class QuizController extends Controller
             ->setBindings($query->getBindings(), 'where')
             ->whereRaw("({$query->toSql()}) > ?", $min_questions)
             ->where('quiz_name', 'ILIKE', "%$search%")
+            ->orderBy('created_at', 'desc')
             ->paginate(12);
 
         return view('kuis.index', compact('quizes'));
