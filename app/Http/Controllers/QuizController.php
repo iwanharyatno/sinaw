@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Quiz;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -15,15 +16,29 @@ class QuizController extends Controller
 {
     public function index()
     {
-        $query = "";
+        $search = "";
+        $min_questions = 0;
 
         if (request('q')) {
-            $query = request('q');
+            $search = request('q');
         }
 
-        $quizes = Quiz::with('questions')->where('is_public', 'true')->where('quiz_name', 'ILIKE', "%$query%")->orderBy('created_at', 'desc')->paginate(12);
+        if (request('min_questions')) {
+            $min_questions = request('min_questions');
+        }
 
-        return view('kuis.index', compact('quizes', 'query'));
+        $quizes = Quiz::query()
+            ->withCount([
+                'questions' => function (Builder $builder) use (&$query) {
+                    $query = $builder;
+                },
+            ])
+            ->setBindings($query->getBindings(), 'where')
+            ->whereRaw("({$query->toSql()}) > ?", $min_questions)
+            ->where('quiz_name', 'ILIKE', "%$search%")
+            ->paginate(12);
+
+        return view('kuis.index', compact('quizes'));
     }
 
     public function indexMine()
