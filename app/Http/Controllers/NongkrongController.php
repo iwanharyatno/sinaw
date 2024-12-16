@@ -17,10 +17,10 @@ class NongkrongController extends Controller
     public function index()
     {
         $category = request('category');
-        $threads = ThreadDiscussion::with('user', 'replies', 'likes')->orderBy('created_at', 'desc')->paginate(2);
+        $threads = ThreadDiscussion::with('user', 'replies', 'likes')->orderBy('created_at', 'desc')->paginate(10);
 
         if ($category) {
-            $threads = ThreadDiscussion::with('user', 'replies')->where('category', $category)->orderBy('created_at', 'desc')->paginate(2);
+            $threads = ThreadDiscussion::with('user', 'replies')->where('category', $category)->orderBy('created_at', 'desc')->paginate(10);
         }
 
         return view('nongkrong.index', compact('threads'));

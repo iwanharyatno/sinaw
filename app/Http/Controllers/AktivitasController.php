@@ -11,7 +11,7 @@ class AktivitasController extends Controller
 {
     public function index() {
         $user = User::find(Auth::user()->id);
-        $attempts = $user->quizAttempts()->with('quiz.questions', 'quiz.user')->orderBy('created_at', 'desc')->get();
+        $attempts = $user->quizAttempts()->with('quiz.questions', 'quiz.user')->orderBy('created_at', 'desc')->paginate(12);
         return view('aktivitas.index', compact('attempts'));
     }
 

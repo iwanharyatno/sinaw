@@ -55,6 +55,10 @@
                     </div>
                 @endforeach
             </div>
+
+            <div class="mt-8 bg-white pl-4 rounded-lg">
+                {!! $quizes->links() !!}
+            </div>
         </div>
 
     @endsection

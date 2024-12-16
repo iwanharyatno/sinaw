@@ -39,31 +39,41 @@
                                 class="flex-1 inline-block bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition text-center"><i
                                     class="fa fa-edit" style="font-size:24px"></i></a>
                             <form action="{{ route('quiz.delete', $quiz->id) }}" method="post"
-                                onsubmit="return handleQuizAction(event, 'Hapus', 'Ingin Menghapus kuis ini?')" class="inline flex-1">
+                                onsubmit="return handleQuizAction(event, 'Hapus', 'Ingin Menghapus kuis ini?')"
+                                class="inline flex-1">
                                 @csrf
                                 <button class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-red-700 transition"><i
                                         class="fa fa-trash" style="font-size:24px"></i></button>
                             </form>
                             @if ($quiz->is_public)
-                                <form class="flex-1" action="{{ route('quiz.change-visibility', ['id' => $quiz->id, 'is_public' => false]) }}" method="post"
-                                    onsubmit="return handleQuizAction(event, 'Akhiri', 'Mengakhiri kuis ini?')" class="inline">
+                                <form class="flex-1"
+                                    action="{{ route('quiz.change-visibility', ['id' => $quiz->id, 'is_public' => false]) }}"
+                                    method="post"
+                                    onsubmit="return handleQuizAction(event, 'Akhiri', 'Mengakhiri kuis ini?')"
+                                    class="inline">
                                     @csrf
                                     <button
                                         class="w-full bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 transition">Akhiri
                                         Kuis </button>
                                 </form>
                             @else
-                                <form class="flex-1" action="{{ route('quiz.change-visibility', ['id' => $quiz->id, 'is_public' => true]) }}" method="post"
+                                <form class="flex-1"
+                                    action="{{ route('quiz.change-visibility', ['id' => $quiz->id, 'is_public' => true]) }}"
+                                    method="post"
                                     onsubmit="return handleQuizAction(event, 'Mulai', 'Memulai kuis ini?')"class="inline">
                                     @csrf
                                     <button
-                                        class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition">Buka kuis </button>
+                                        class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition">Buka
+                                        kuis </button>
                                 </form>
                             @endif
                         </div>
                     </div>
                     <!-- Salin kartu di atas untuk mengisi grid -->
                 @endforeach
+            </div>
+            <div class="mt-8 bg-white pl-4 rounded-full">
+                {{ $quizes->links() }}
             </div>
         </div>
 

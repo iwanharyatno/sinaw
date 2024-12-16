@@ -21,7 +21,7 @@ class QuizController extends Controller
             $query = request('q');
         }
 
-        $quizes = Quiz::with('questions')->where('is_public', 'true')->where('quiz_name', 'ILIKE', "%$query%")->orderBy('created_at', 'desc')->get();
+        $quizes = Quiz::with('questions')->where('is_public', 'true')->where('quiz_name', 'ILIKE', "%$query%")->orderBy('created_at', 'desc')->paginate(12);
 
         return view('kuis.index', compact('quizes', 'query'));
     }
@@ -29,7 +29,7 @@ class QuizController extends Controller
     public function indexMine()
     {
         $user = User::find(Auth::user()->id);
-        $quizes = $user->quizzes()->with('questions.answers')->orderBy('created_at', 'desc')->get();
+        $quizes = $user->quizzes()->with('questions.answers')->orderBy('created_at', 'desc')->paginate(12);
 
         return view('kuis.mine', compact('quizes'));
     }
