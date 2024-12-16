@@ -15,4 +15,8 @@ class ThreadDiscussion extends Model
     public function user() {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
+
+    public function likes() {
+        return $this->belongsToMany(User::class, 'thread_likes', 'thread_id', 'user_id');
+    }
 }

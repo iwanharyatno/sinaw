@@ -60,4 +60,8 @@ class User extends Authenticatable
     public function threads() {
         return $this->hasMany(ThreadDiscussion::class, 'user_id', 'id');
     }
+
+    public function threadLikes() {
+        return $this->belongsToMany(ThreadDiscussion::class, 'thread_likes', 'user_id', 'thread_id');
+    }
 }

@@ -52,6 +52,13 @@
                         </div>
                     </div>
                 </div>
+            @else
+                <div class="flex gap-4">
+                    <a href="{{ route('home.register') }}"
+                        class="bg-pink-500 text-white px-4 py-2 rounded-full hover:bg-pink-600">Daftar</a>
+                    <a href="{{ route('home.login') }}"
+                        class="bg-pink-500 text-white px-4 py-2 rounded-full hover:bg-pink-600">Masuk</a>
+                </div>
             @endauth
 
             <!-- Hamburger Menu -->
@@ -59,8 +66,7 @@
                 <button id="hamburger" class="focus:outline-none">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M4 6h16M4 12h16m-7 6h7" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
                     </svg>
                 </button>
             </div>
@@ -73,19 +79,22 @@
                     <button id="close-sidebar" class="focus:outline-none">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M6 18L18 6M6 6l12 12" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                         </svg>
                     </button>
                 </div>
                 <ul class="p-4">
-                    <li><a href="{{ route('home.index') }}" class="block py-2 px-4 hover:bg-gray-700 rounded-md">Beranda</a>
+                    <li><a href="{{ route('home.index') }}"
+                            class="block py-2 px-4 hover:bg-gray-700 rounded-md">Beranda</a>
                     </li>
-                    <li><a href="{{ route('aktivitas.index') }}" class="block py-2 px-4 hover:bg-gray-700 rounded-md">Aktivitas
+                    <li><a href="{{ route('aktivitas.index') }}"
+                            class="block py-2 px-4 hover:bg-gray-700 rounded-md">Aktivitas
                             Saya</a></li>
-                    <li><a href="{{ route('nongkrong.index') }}" class="block py-2 px-4 hover:bg-gray-700 rounded-md">Nongkrong</a>
+                    <li><a href="{{ route('nongkrong.index') }}"
+                            class="block py-2 px-4 hover:bg-gray-700 rounded-md">Nongkrong</a>
                     </li>
-                    <li><a href="{{ route('quiz.index') }}" class="block py-2 px-4 hover:bg-gray-700 rounded-md">Kuis</a></li>
+                    <li><a href="{{ route('quiz.index') }}" class="block py-2 px-4 hover:bg-gray-700 rounded-md">Kuis</a>
+                    </li>
                 </ul>
                 <div class="p-4">
                     @auth
@@ -99,8 +108,7 @@
                         </a>
                         <form method="POST" action="{{ route('home.logout') }}">
                             @csrf
-                            <button
-                                class="block w-full bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 mt-4">
+                            <button class="block w-full bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 mt-4">
                                 Logout
                             </button>
                         </form>

@@ -60,7 +60,7 @@ class HomeController extends Controller
             return redirect()->intended();
         } else {
             return back()->withErrors([
-                'general' => 'User not found!'
+                'general' => 'Akun tidak ditemukan!'
             ])->withInput();
         }
     }

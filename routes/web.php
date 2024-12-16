@@ -59,6 +59,7 @@ Route::controller(NongkrongController::class)->group(function () {
         Route::get('/nongkrong/mine', 'mine')->name('nongkrong.mine');
         Route::post('/nongkrong/create', 'store')->name('nongkrong.store');
         Route::post('/nongkrong/{threadId}/replies', 'storeReply')->name('nongkrong.store-reply');
+        Route::post('/nongkrong/threads/{id}/update-like', 'updateLike')->name('nongkrong.update-like');
     });
 });
 Route::controller(AktivitasController::class)->group(function () {

@@ -25,6 +25,13 @@ class OAuthController extends Controller
 
             return redirect()->route('home.index');
         } else {
+            $emailUser = User::where('email', $user->email)->first();
+            if ($emailUser) {
+                return back()->withErrors([
+                    'general' => 'User sudah terdaftar menggunakan email.'
+                ])->withInput();
+            }
+
             $nameSplit = explode(' ', $user->name);
             $firstName = $nameSplit[0];
             unset($nameSplit[0]);

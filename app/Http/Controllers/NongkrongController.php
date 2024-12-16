@@ -16,7 +16,12 @@ class NongkrongController extends Controller
 {
     public function index()
     {
-        $threads = ThreadDiscussion::with('user', 'replies')->orderBy('created_at', 'desc')->get();
+        $category = request('category');
+        $threads = ThreadDiscussion::with('user', 'replies', 'likes')->orderBy('created_at', 'desc')->paginate(2);
+
+        if ($category) {
+            $threads = ThreadDiscussion::with('user', 'replies')->where('category', $category)->orderBy('created_at', 'desc')->paginate(2);
+        }
 
         return view('nongkrong.index', compact('threads'));
     }
@@ -94,5 +99,25 @@ class NongkrongController extends Controller
         ]);
 
         return back();
+    }
+
+    public function updateLike($id) {
+        $userId = Auth::user()->id;
+        $thread = ThreadDiscussion::find($id);
+        $liked = $thread->likes()->where('user_id', $userId)->first();
+
+        if ($liked) {
+            $thread->likes()->detach($userId);
+            $thread->likes_count -= 1;
+        } else {
+            $thread->likes()->attach($userId);
+            $thread->likes_count += 1;
+        }
+
+        $thread->save();
+
+        return response()->json([
+            'success' => true 
+        ]);
     }
 }
